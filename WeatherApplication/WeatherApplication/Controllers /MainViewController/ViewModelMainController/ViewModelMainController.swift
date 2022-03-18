@@ -7,10 +7,12 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 class ViewModelMainController: UIViewController {
 
     var weatherModel:[WeatherModel] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
