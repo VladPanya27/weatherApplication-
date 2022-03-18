@@ -8,90 +8,94 @@
 import Foundation
 
 class WeatherModel: Codable {
-    let coord: Coord
-    let weather: [Weather]
-    let base: String
-    let main: Main
-    let visibility: Int
-    let wind: Wind
-    let clouds: Clouds
-    let dt: Int
-    let sys: Sys
-    let timezone, id: Int
-    let name: String
-    let cod: Int
-
-    init(coord: Coord, weather: [Weather], base: String, main: Main, visibility: Int, wind: Wind, clouds: Clouds, dt: Int, sys: Sys, timezone: Int, id: Int, name: String, cod: Int) {
-        self.coord = coord
-        self.weather = weather
-        self.base = base
-        self.main = main
-        self.visibility = visibility
-        self.wind = wind
-        self.clouds = clouds
-        self.dt = dt
-        self.sys = sys
-        self.timezone = timezone
-        self.id = id
-        self.name = name
-        self.cod = cod
-    }
-}
-
-// MARK: - Clouds
-class Clouds: Codable {
-    let all: Int
-
-    init(all: Int) {
-        self.all = all
-    }
-}
-
-// MARK: - Coord
-class Coord: Codable {
-    let lon, lat: Double
-
-    init(lon: Double, lat: Double) {
-        self.lon = lon
-        self.lat = lat
-    }
-}
-
-// MARK: - Main
-class Main: Codable {
-    let temp, feelsLike, tempMin, tempMax: Double
-    let pressure, humidity: Int
+    let lat, lon: Double?
+    let timezone: String?
+    let timezoneOffset: Int?
+    let current: Current?
+    let minutely: [Minutely]?
+    let alerts: [Alert]?
 
     enum CodingKeys: String, CodingKey {
-        case temp
-        case feelsLike = "feels_like"
-        case tempMin = "temp_min"
-        case tempMax = "temp_max"
-        case pressure, humidity
+        case lat, lon, timezone
+        case timezoneOffset = "timezone_offset"
+        case current, minutely, alerts
     }
 
-    init(temp: Double, feelsLike: Double, tempMin: Double, tempMax: Double, pressure: Int, humidity: Int) {
-        self.temp = temp
-        self.feelsLike = feelsLike
-        self.tempMin = tempMin
-        self.tempMax = tempMax
-        self.pressure = pressure
-        self.humidity = humidity
+    init(lat: Double, lon: Double, timezone: String, timezoneOffset: Int, current: Current, minutely: [Minutely], alerts: [Alert]) {
+        self.lat = lat
+        self.lon = lon
+        self.timezone = timezone
+        self.timezoneOffset = timezoneOffset
+        self.current = current
+        self.minutely = minutely
+        self.alerts = alerts
     }
 }
 
-// MARK: - Sys
-class Sys: Codable {
-    let type, id: Int
-    let country: String
-    let sunrise, sunset: Int
+// MARK: - Alert
+class Alert: Codable {
+    let senderName, event: String
+    let start, end: Int
+    let alertDescription: String
+    let tags: [String]
 
-    init(type: Int, id: Int, country: String, sunrise: Int, sunset: Int) {
-        self.type = type
-        self.id = id
-        self.country = country
+    enum CodingKeys: String, CodingKey {
+        case senderName = "sender_name"
+        case event, start, end
+        case alertDescription = "description"
+        case tags
+    }
+
+    init(senderName: String, event: String, start: Int, end: Int, alertDescription: String, tags: [String]) {
+        self.senderName = senderName
+        self.event = event
+        self.start = start
+        self.end = end
+        self.alertDescription = alertDescription
+        self.tags = tags
+    }
+}
+
+// MARK: - Current
+class Current: Codable {
+    let dt, sunrise, sunset: Int
+    let temp, feelsLike: Double
+    let pressure, humidity: Int
+    let dewPoint, uvi: Double
+    let clouds, visibility: Int
+    let windSpeed: Double
+    let windDeg: Int
+   // let windGust: Double
+    let weather: [Weather]
+
+    enum CodingKeys: String, CodingKey {
+        case dt, sunrise, sunset, temp
+        case feelsLike = "feels_like"
+        case pressure, humidity
+        case dewPoint = "dew_point"
+        case uvi, clouds, visibility
+        case windSpeed = "wind_speed"
+        case windDeg = "wind_deg"
+      //  case windGust = "wind_gust"
+        case weather
+    }
+
+    init(dt: Int, sunrise: Int, sunset: Int, temp: Double, feelsLike: Double, pressure: Int, humidity: Int, dewPoint: Double, uvi: Double, clouds: Int, visibility: Int, windSpeed: Double, windDeg: Int, weather: [Weather]) {
+        self.dt = dt
         self.sunrise = sunrise
         self.sunset = sunset
+        self.temp = temp
+        self.feelsLike = feelsLike
+        self.pressure = pressure
+        self.humidity = humidity
+        self.dewPoint = dewPoint
+        self.uvi = uvi
+        self.clouds = clouds
+        self.visibility = visibility
+        self.windSpeed = windSpeed
+        self.windDeg = windDeg
+       // self.windGust = windGust
+        self.weather = weather
     }
 }
 
@@ -114,14 +118,12 @@ class Weather: Codable {
     }
 }
 
-// MARK: - Wind
-class Wind: Codable {
-    let speed: Double
-    let deg: Int
+// MARK: - Minutely
+class Minutely: Codable {
+    let dt, precipitation: Int
 
-    init(speed: Double, deg: Int) {
-        self.speed = speed
-        self.deg = deg
+    init(dt: Int, precipitation: Int) {
+        self.dt = dt
+        self.precipitation = precipitation
     }
 }
-
