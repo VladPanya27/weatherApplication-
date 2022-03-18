@@ -27,16 +27,15 @@ enum СomponentsOfTheRequest {
 
 class NetworkManager {
     
-    func loadWeatherLatAndLon(lat: CLLocationDegrees, lon:CLLocationDegrees, completion: @escaping (WeatherModel?, Error?) -> Void ) {
+    func loadWeatherWithLatAndLon(lat: CLLocationDegrees, lon:CLLocationDegrees, completion: @escaping (WeatherModel?) -> Void ) {
         
         let request = СomponentsOfTheRequest.baseUrl.component + СomponentsOfTheRequest.componentPath.component + СomponentsOfTheRequest.lat.component + "\(lat)" + СomponentsOfTheRequest.lon.component + "\(lon)" + СomponentsOfTheRequest.keyApi.component
     
         AF.request(request) .validate()
             .responseDecodable(of:WeatherModel.self) { weather in
-                if let error = weather.error {
-                    completion(nil, error)
-                } else if let data = weather.value {
-                    completion(data, nil)
+                guard weather.error == nil else { return }
+                     if let data = weather.value {
+                        completion(data)
             }
         }
     }

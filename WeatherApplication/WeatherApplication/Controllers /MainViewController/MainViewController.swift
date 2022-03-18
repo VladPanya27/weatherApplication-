@@ -71,13 +71,13 @@ extension MainViewController: CLLocationManagerDelegate {
          guard let currentLocation = currentLocation else {
             return
         }
-        let long = currentLocation.coordinate.longitude
+        
+        let lon = currentLocation.coordinate.longitude
         let lat = currentLocation.coordinate.latitude
         
-        viewModel.loadDataWeather(with: lat, with: long) { [weak self] error in
-            guard error == nil else {return}
+        viewModel.loadDataWeather(lat: lat, lon: lon) {
             DispatchQueue.main.async {
-                self?.tableView.reloadData()
+                self.tableView.reloadData()
             }
         }
     }

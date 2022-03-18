@@ -19,14 +19,12 @@ class ViewModelMainController: UIViewController {
         super.viewDidLoad()
     }
     
-    func loadDataWeather (with lat: CLLocationDegrees, with lon:CLLocationDegrees, completion: @escaping (Error?) -> Void) {
-        network.loadWeatherLatAndLon(with: lat, with: lon) { [weak self] weatherData, weatherDataError  in
+    func loadDataWeather (lat: CLLocationDegrees, lon:CLLocationDegrees, completion: @escaping () -> Void?) {
+        network.loadWeatherWithLatAndLon(lat: lat, lon: lon) { [weak self] weatherData  in
             if let completData = weatherData {
                 self?.weatherModel.append(completData)
-                completion(nil)
-            } else {
-                completion(weatherDataError)
             }
+            completion()
         }
     }
 }
