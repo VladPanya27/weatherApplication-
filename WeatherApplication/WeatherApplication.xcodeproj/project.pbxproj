@@ -11,6 +11,9 @@
 		0072F2C327E4864400DDB6BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072F2C227E4864400DDB6BB /* SceneDelegate.swift */; };
 		0072F2CA27E4864400DDB6BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0072F2C927E4864400DDB6BB /* Assets.xcassets */; };
 		0072F2CD27E4864400DDB6BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0072F2CB27E4864400DDB6BB /* LaunchScreen.storyboard */; };
+		0072F2D727E4A0E600DDB6BB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072F2D527E4A0E600DDB6BB /* MainViewController.swift */; };
+		0072F2D827E4A0E600DDB6BB /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0072F2D627E4A0E600DDB6BB /* MainViewController.xib */; };
+		0072F2DC27E4A17300DDB6BB /* ViewModelMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072F2DB27E4A17300DDB6BB /* ViewModelMainController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +23,9 @@
 		0072F2C927E4864400DDB6BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0072F2CC27E4864400DDB6BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0072F2CE27E4864400DDB6BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0072F2D527E4A0E600DDB6BB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		0072F2D627E4A0E600DDB6BB /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		0072F2DB27E4A17300DDB6BB /* ViewModelMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelMainController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +58,7 @@
 		0072F2BF27E4864400DDB6BB /* WeatherApplication */ = {
 			isa = PBXGroup;
 			children = (
+				0072F2D427E4A07400DDB6BB /* Controllers  */,
 				0072F2C027E4864400DDB6BB /* AppDelegate.swift */,
 				0072F2C227E4864400DDB6BB /* SceneDelegate.swift */,
 				0072F2C927E4864400DDB6BB /* Assets.xcassets */,
@@ -59,6 +66,32 @@
 				0072F2CE27E4864400DDB6BB /* Info.plist */,
 			);
 			path = WeatherApplication;
+			sourceTree = "<group>";
+		};
+		0072F2D427E4A07400DDB6BB /* Controllers  */ = {
+			isa = PBXGroup;
+			children = (
+				0072F2D927E4A10600DDB6BB /* MainViewController */,
+			);
+			path = "Controllers ";
+			sourceTree = "<group>";
+		};
+		0072F2D927E4A10600DDB6BB /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0072F2D527E4A0E600DDB6BB /* MainViewController.swift */,
+				0072F2DA27E4A13100DDB6BB /* ViewModelMainController */,
+				0072F2D627E4A0E600DDB6BB /* MainViewController.xib */,
+			);
+			path = MainViewController;
+			sourceTree = "<group>";
+		};
+		0072F2DA27E4A13100DDB6BB /* ViewModelMainController */ = {
+			isa = PBXGroup;
+			children = (
+				0072F2DB27E4A17300DDB6BB /* ViewModelMainController.swift */,
+			);
+			path = ViewModelMainController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0072F2CD27E4864400DDB6BB /* LaunchScreen.storyboard in Resources */,
+				0072F2D827E4A0E600DDB6BB /* MainViewController.xib in Resources */,
 				0072F2CA27E4864400DDB6BB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,6 +164,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0072F2D727E4A0E600DDB6BB /* MainViewController.swift in Sources */,
+				0072F2DC27E4A17300DDB6BB /* ViewModelMainController.swift in Sources */,
 				0072F2C127E4864400DDB6BB /* AppDelegate.swift in Sources */,
 				0072F2C327E4864400DDB6BB /* SceneDelegate.swift in Sources */,
 			);
