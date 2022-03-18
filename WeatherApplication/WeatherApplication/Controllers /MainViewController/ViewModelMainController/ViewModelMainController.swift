@@ -6,12 +6,13 @@
 //
 
 import Foundation
-
+import UIKit
 
 class ViewModelMainController: UIViewController {
 
+    var weatherModel:[WeatherModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 }

@@ -14,6 +14,7 @@
 		0072F2D727E4A0E600DDB6BB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072F2D527E4A0E600DDB6BB /* MainViewController.swift */; };
 		0072F2D827E4A0E600DDB6BB /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0072F2D627E4A0E600DDB6BB /* MainViewController.xib */; };
 		0072F2DC27E4A17300DDB6BB /* ViewModelMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072F2DB27E4A17300DDB6BB /* ViewModelMainController.swift */; };
+		0072F2DF27E4A97A00DDB6BB /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072F2DE27E4A97A00DDB6BB /* WeatherModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		0072F2D527E4A0E600DDB6BB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0072F2D627E4A0E600DDB6BB /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		0072F2DB27E4A17300DDB6BB /* ViewModelMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelMainController.swift; sourceTree = "<group>"; };
+		0072F2DE27E4A97A00DDB6BB /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		0072F2BF27E4864400DDB6BB /* WeatherApplication */ = {
 			isa = PBXGroup;
 			children = (
+				0072F2DD27E4A96B00DDB6BB /* Models */,
 				0072F2D427E4A07400DDB6BB /* Controllers  */,
 				0072F2C027E4864400DDB6BB /* AppDelegate.swift */,
 				0072F2C227E4864400DDB6BB /* SceneDelegate.swift */,
@@ -92,6 +95,14 @@
 				0072F2DB27E4A17300DDB6BB /* ViewModelMainController.swift */,
 			);
 			path = ViewModelMainController;
+			sourceTree = "<group>";
+		};
+		0072F2DD27E4A96B00DDB6BB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0072F2DE27E4A97A00DDB6BB /* WeatherModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,6 +179,7 @@
 				0072F2DC27E4A17300DDB6BB /* ViewModelMainController.swift in Sources */,
 				0072F2C127E4864400DDB6BB /* AppDelegate.swift in Sources */,
 				0072F2C327E4864400DDB6BB /* SceneDelegate.swift in Sources */,
+				0072F2DF27E4A97A00DDB6BB /* WeatherModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
