@@ -27,6 +27,7 @@ class MainViewController: UIViewController {
         super.viewDidAppear(animated)
         setupLocation()
     }
+    
 }
     
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
@@ -43,7 +44,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         return UITableViewCell()
+        let array = viewModel.weatherModel[indexPath.row]
+        let cell = UITableViewCell()
+            cell.textLabel?.text = array.name
+        return cell
         }
 }
 
@@ -69,6 +73,12 @@ extension MainViewController: CLLocationManagerDelegate {
         }
         let long = currentLocation.coordinate.longitude
         let lat = currentLocation.coordinate.latitude
-        print("\(long) | \(lat)" )
+        
+        viewModel.loadDataWeather(with: lat, with: long) { [weak self] error in
+            guard error == nil else {return}
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
     }
 }
