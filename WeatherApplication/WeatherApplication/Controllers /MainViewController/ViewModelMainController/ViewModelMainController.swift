@@ -11,7 +11,7 @@ import CoreLocation
 
 class ViewModelMainController: UIViewController {
 
-    var weatherModel:[WeatherModel] = []
+    var dailyWeatherModel:[Daily] = []
     
     let network = NetworkManager()
     
@@ -21,8 +21,8 @@ class ViewModelMainController: UIViewController {
     
     func loadDataWeather (lat: CLLocationDegrees, lon:CLLocationDegrees, completion: @escaping () -> Void?) {
         network.loadWeatherWithLatAndLon(lat: lat, lon: lon) { [weak self] weatherData  in
-            if let completData = weatherData {
-                self?.weatherModel.append(completData)
+            if let completData = weatherData?.daily {
+                self?.dailyWeatherModel.append(contentsOf: completData)
             }
             completion()
         }

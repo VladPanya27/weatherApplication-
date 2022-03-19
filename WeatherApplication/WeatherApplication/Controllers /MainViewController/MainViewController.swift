@@ -11,7 +11,7 @@ import CoreLocation
 class MainViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
+        
     let viewModel = ViewModelMainController()
     
     let locationManager = CLLocationManager()
@@ -27,7 +27,6 @@ class MainViewController: UIViewController {
         super.viewDidAppear(animated)
         setupLocation()
     }
-    
 }
     
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
@@ -40,15 +39,18 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return viewModel.weatherModel.count
+         return viewModel.dailyWeatherModel.count
         }
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let array = viewModel.weatherModel[indexPath.row]
-        let cell = UITableViewCell()
-        cell.textLabel?.text = array.timezone
+        let cell:WeatherCell = tableView.dequeueReusableCell(withIdentifier: WeatherCell.identifire, for: indexPath) as! WeatherCell
+        cell.configure(with: viewModel.dailyWeatherModel[indexPath.row])
         return cell
-        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
 }
 
 extension MainViewController: CLLocationManagerDelegate {
