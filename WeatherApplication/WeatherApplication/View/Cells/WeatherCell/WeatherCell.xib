@@ -21,16 +21,12 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="66" id="U9X-Vi-fqk"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0mx-uQ-upR">
-                        <rect key="frame" x="332" y="30" width="64" height="60"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="64" id="2c2-Wh-odw"/>
-                            <constraint firstAttribute="height" constant="60" id="khF-D2-AYw"/>
-                        </constraints>
+                        <rect key="frame" x="332" y="30" width="59" height="60"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRW-Ef-5kv">
                         <rect key="frame" x="74" y="0.0" width="250" height="120"/>
@@ -38,21 +34,23 @@
                             <constraint firstAttribute="height" constant="120" id="Wae-UJ-OyW"/>
                             <constraint firstAttribute="width" constant="250" id="q3b-ks-wCr"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="31"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="0mx-uQ-upR" secondAttribute="trailing" constant="5" id="3KV-qm-XO3"/>
-                    <constraint firstItem="0mx-uQ-upR" firstAttribute="leading" secondItem="HRW-Ef-5kv" secondAttribute="trailing" constant="8" symbolic="YES" id="3u6-P7-fP9"/>
                     <constraint firstItem="HRW-Ef-5kv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Akt-qF-WBj"/>
-                    <constraint firstItem="0mx-uQ-upR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="Tba-ze-X04"/>
+                    <constraint firstItem="0mx-uQ-upR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="JJV-rw-oZI"/>
+                    <constraint firstItem="0mx-uQ-upR" firstAttribute="leading" secondItem="HRW-Ef-5kv" secondAttribute="trailing" constant="8" symbolic="YES" id="P2L-IF-gpp"/>
                     <constraint firstAttribute="bottom" secondItem="QjM-lr-pYr" secondAttribute="bottom" id="b6i-LN-uNd"/>
                     <constraint firstAttribute="bottom" secondItem="HRW-Ef-5kv" secondAttribute="bottom" id="eyL-4F-bV1"/>
+                    <constraint firstAttribute="trailing" secondItem="0mx-uQ-upR" secondAttribute="trailing" constant="10" id="fRU-EM-t5K"/>
                     <constraint firstItem="HRW-Ef-5kv" firstAttribute="leading" secondItem="QjM-lr-pYr" secondAttribute="trailing" constant="8" symbolic="YES" id="j7x-uy-Ji9"/>
                     <constraint firstItem="QjM-lr-pYr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="m4w-o0-HkT"/>
                     <constraint firstItem="QjM-lr-pYr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="p0R-Vc-TFV"/>
+                    <constraint firstAttribute="bottom" secondItem="0mx-uQ-upR" secondAttribute="bottom" constant="30" id="q7j-EV-GOn"/>
+                    <constraint firstItem="0mx-uQ-upR" firstAttribute="centerY" secondItem="HRW-Ef-5kv" secondAttribute="centerY" id="qkc-c7-3ew"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

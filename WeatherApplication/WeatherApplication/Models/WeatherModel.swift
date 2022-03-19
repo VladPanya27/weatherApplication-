@@ -145,8 +145,7 @@ class Daily: Codable {
     let windDeg: Int
     let windGust: Double
     let weather: [Weather]
-    let clouds: Int
-    let pop: Double
+    let clouds, pop: Int
     let rain: Double?
     let uvi: Double
 
@@ -163,7 +162,7 @@ class Daily: Codable {
         case weather, clouds, pop, rain, uvi
     }
 
-    init(dt: Int, sunrise: Int, sunset: Int, moonrise: Int, moonset: Int, moonPhase: Double, temp: Temp, feelsLike: FeelsLike, pressure: Int, humidity: Int, dewPoint: Double, windSpeed: Double, windDeg: Int, windGust: Double, weather: [Weather], clouds: Int, pop: Double, rain: Double?, uvi: Double) {
+    init(dt: Int, sunrise: Int, sunset: Int, moonrise: Int, moonset: Int, moonPhase: Double, temp: Temp, feelsLike: FeelsLike, pressure: Int, humidity: Int, dewPoint: Double, windSpeed: Double, windDeg: Int, windGust: Double, weather: [Weather], clouds: Int, pop: Int, rain: Double?, uvi: Double) {
         self.dt = dt
         self.sunrise = sunrise
         self.sunset = sunset

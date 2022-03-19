@@ -51,7 +51,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 90
     }
 }
 
@@ -88,10 +88,22 @@ extension MainViewController: CLLocationManagerDelegate {
     }
     
     func createTableHeader() -> UIView {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width))
-        headerView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
-
         
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width))
+        
+        headerView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+        
+        let image = UIImageView(frame: CGRect(x: 15, y: 10, width: 25, height: 25))
+        
+      //  let cityLabel = UILabel(frame: CGRect(x: 50, y: image.frame.size.height-40, width: view.frame.size.width-20, height: headerView.frame.size.height/5))
+        //    cityLabel.textColor = .white
+        
+        headerView.addSubview(image)
+       // headerView.addSubview(cityLabel)
+
+        image.image = UIImage(named: "icons-location")
+       // cityLabel.text = "ЗАПОРОЖЬЕ"
+                
         return headerView
     }
 
