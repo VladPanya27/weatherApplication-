@@ -32,7 +32,7 @@ class WeatherCell: UITableViewCell {
         self.tempLabel.text = "\(Int(model.temp.min - 273.15))°/ \(Int(model.temp.max - 273.15))°"
 
         model.weather.forEach { if $0.icon.contains("10d") {
-        self.iconImageView.image = UIImage(systemName:"cloud.rain")
+            self.iconImageView.image = UIImage(systemName:"cloud.rain")
         } else if $0.icon.contains("01d") {
         self.iconImageView.image = UIImage(systemName:"sun.max")
         } else {

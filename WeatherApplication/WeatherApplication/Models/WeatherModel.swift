@@ -7,13 +7,6 @@
 
 import Foundation
 
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
-//
-//   let weatherModel = try? newJSONDecoder().decode(WeatherModel.self, from: jsonData)
-
-import Foundation
-
 // MARK: - WeatherModel
 class WeatherModel: Codable {
     let lat, lon: Double
@@ -152,7 +145,8 @@ class Daily: Codable {
     let windDeg: Int
     let windGust: Double
     let weather: [Weather]
-    let clouds, pop: Int
+    let clouds: Int
+    let pop: Double
     let rain: Double?
     let uvi: Double
 
@@ -169,7 +163,7 @@ class Daily: Codable {
         case weather, clouds, pop, rain, uvi
     }
 
-    init(dt: Int, sunrise: Int, sunset: Int, moonrise: Int, moonset: Int, moonPhase: Double, temp: Temp, feelsLike: FeelsLike, pressure: Int, humidity: Int, dewPoint: Double, windSpeed: Double, windDeg: Int, windGust: Double, weather: [Weather], clouds: Int, pop: Int, rain: Double?, uvi: Double) {
+    init(dt: Int, sunrise: Int, sunset: Int, moonrise: Int, moonset: Int, moonPhase: Double, temp: Temp, feelsLike: FeelsLike, pressure: Int, humidity: Int, dewPoint: Double, windSpeed: Double, windDeg: Int, windGust: Double, weather: [Weather], clouds: Int, pop: Double, rain: Double?, uvi: Double) {
         self.dt = dt
         self.sunrise = sunrise
         self.sunset = sunset

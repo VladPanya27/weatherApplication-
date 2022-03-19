@@ -30,7 +30,7 @@ class NetworkManager {
     func loadWeatherWithLatAndLon(lat: CLLocationDegrees, lon:CLLocationDegrees, completion: @escaping (WeatherModel?) -> Void ) {
         
         let request = СomponentsOfTheRequest.baseUrl.component + СomponentsOfTheRequest.componentPath.component + СomponentsOfTheRequest.lat.component + "\(lat)" + СomponentsOfTheRequest.lon.component + "\(lon)" + СomponentsOfTheRequest.keyApi.component
-        
+
         AF.request(request) .validate()
             .responseDecodable(of:WeatherModel.self) { weather in
                 guard weather.error == nil else { return }

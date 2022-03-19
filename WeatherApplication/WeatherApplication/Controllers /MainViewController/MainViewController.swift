@@ -26,6 +26,7 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupLocation()
+        view.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
     }
 }
     
@@ -36,7 +37,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
          tableView.dataSource = self
          tableView.register(HourlyCell.nib(), forCellReuseIdentifier: HourlyCell.identifire)
          tableView.register(WeatherCell.nib(), forCellReuseIdentifier: WeatherCell.identifire)
-        }
+        tableView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+    }
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          return viewModel.dailyWeatherModel.count
@@ -80,7 +82,17 @@ extension MainViewController: CLLocationManagerDelegate {
         viewModel.loadDataWeather(lat: lat, lon: lon) {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.tableView.tableHeaderView = self.createTableHeader()
             }
         }
     }
+    
+    func createTableHeader() -> UIView {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width))
+        headerView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+
+        
+        return headerView
+    }
+
 }
