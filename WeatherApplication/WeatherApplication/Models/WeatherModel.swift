@@ -20,19 +20,8 @@ class WeatherModel: Codable {
         case timezoneOffset = "timezone_offset"
         case current, minutely, alerts
     }
-
-    init(lat: Double, lon: Double, timezone: String, timezoneOffset: Int, current: Current, minutely: [Minutely], alerts: [Alert]) {
-        self.lat = lat
-        self.lon = lon
-        self.timezone = timezone
-        self.timezoneOffset = timezoneOffset
-        self.current = current
-        self.minutely = minutely
-        self.alerts = alerts
-    }
 }
 
-// MARK: - Alert
 class Alert: Codable {
     let senderName, event: String
     let start, end: Int
@@ -45,18 +34,8 @@ class Alert: Codable {
         case alertDescription = "description"
         case tags
     }
-
-    init(senderName: String, event: String, start: Int, end: Int, alertDescription: String, tags: [String]) {
-        self.senderName = senderName
-        self.event = event
-        self.start = start
-        self.end = end
-        self.alertDescription = alertDescription
-        self.tags = tags
-    }
 }
 
-// MARK: - Current
 class Current: Codable {
     let dt, sunrise, sunset: Int
     let temp, feelsLike: Double
@@ -65,7 +44,6 @@ class Current: Codable {
     let clouds, visibility: Int
     let windSpeed: Double
     let windDeg: Int
-   // let windGust: Double
     let weather: [Weather]
 
     enum CodingKeys: String, CodingKey {
@@ -76,30 +54,10 @@ class Current: Codable {
         case uvi, clouds, visibility
         case windSpeed = "wind_speed"
         case windDeg = "wind_deg"
-      //  case windGust = "wind_gust"
         case weather
-    }
-
-    init(dt: Int, sunrise: Int, sunset: Int, temp: Double, feelsLike: Double, pressure: Int, humidity: Int, dewPoint: Double, uvi: Double, clouds: Int, visibility: Int, windSpeed: Double, windDeg: Int, weather: [Weather]) {
-        self.dt = dt
-        self.sunrise = sunrise
-        self.sunset = sunset
-        self.temp = temp
-        self.feelsLike = feelsLike
-        self.pressure = pressure
-        self.humidity = humidity
-        self.dewPoint = dewPoint
-        self.uvi = uvi
-        self.clouds = clouds
-        self.visibility = visibility
-        self.windSpeed = windSpeed
-        self.windDeg = windDeg
-       // self.windGust = windGust
-        self.weather = weather
     }
 }
 
-// MARK: - Weather
 class Weather: Codable {
     let id: Int
     let main, weatherDescription, icon: String
@@ -109,21 +67,8 @@ class Weather: Codable {
         case weatherDescription = "description"
         case icon
     }
-
-    init(id: Int, main: String, weatherDescription: String, icon: String) {
-        self.id = id
-        self.main = main
-        self.weatherDescription = weatherDescription
-        self.icon = icon
-    }
 }
 
-// MARK: - Minutely
 class Minutely: Codable {
     let dt, precipitation: Int
-
-    init(dt: Int, precipitation: Int) {
-        self.dt = dt
-        self.precipitation = precipitation
-    }
 }

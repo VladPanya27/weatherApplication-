@@ -10,8 +10,6 @@ import UIKit
 import Alamofire
 import CoreLocation
 
-// https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=6890632eadfe8b1a00cae24970811d87
-
 enum СomponentsOfTheRequest {
     
     case baseUrl, componentPath, lat, lon, current, hourly, daily, componentExclude, keyApi
