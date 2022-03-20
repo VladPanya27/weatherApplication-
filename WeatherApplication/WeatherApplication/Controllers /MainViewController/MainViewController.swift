@@ -74,7 +74,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         let cityLabel = UILabel()
-            cityLabel.text = "Запорожье"
+            cityLabel.text = viewModel.weatherModel?.timezone
             cityLabel.textColor = .white
             cityLabel.font = UIFont.systemFont(ofSize: 20)
         
@@ -86,7 +86,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let locationButton = UIButton()
-        locationButton.setImage(UIImage(named: "-gps"), for: UIControl.State.normal)
+            locationButton.setImage(UIImage(named: "-gps"), for: UIControl.State.normal)
             headerView.addSubview(locationButton)
         
             locationButton.snp.makeConstraints { maker in
@@ -98,7 +98,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let dayLabel = UILabel()
-            dayLabel.text = "ЧТ, 19 ИЮЛЯ"
+        if let dt = viewModel.current?.dt {
+            dayLabel.text = DateFormatting.getDayForDates(Date(timeIntervalSince1970: Double(dt)))
+        }
             dayLabel.textColor = .white
             dayLabel.font = UIFont.systemFont(ofSize: 15)
         
@@ -109,9 +111,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             maker.top.equalTo(imageLocation).inset(40)
         }
         
-        let imageWeather = UIImageView(image: UIImage(systemName: "cloud.sun"))
+        let imageWeather = UIImageView()
             imageWeather.tintColor = .white
-
+            Icons.configureIcons(with: viewModel.dailyWeatherModel[0], iconImageView: imageWeather)
             headerView.addSubview(imageWeather)
         
             imageWeather.snp.makeConstraints { maker in
@@ -123,6 +125,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let imageTemp = UIImageView(image: UIImage(systemName: "thermometer"))
+            
             imageTemp.tintColor = .white
             headerView.addSubview(imageTemp)
         
@@ -135,7 +138,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let tempLabel = UILabel()
-            tempLabel.text = "27° / 19°"
+            tempLabel.text = "\(Int(viewModel.dailyWeatherModel[0].temp.min - 273.15))°/ \(Int(viewModel.dailyWeatherModel[0].temp.max - 273.15))°"
             tempLabel.textColor = .white
             tempLabel.font = UIFont.systemFont(ofSize: 20)
         
@@ -146,7 +149,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             maker.top.equalTo(headerView).inset(120)
         }
         
-        let imageHumidity = UIImageView(image: UIImage(systemName: "wind"))
+        let imageHumidity = UIImageView(image: UIImage(named: "humidity"))
             imageHumidity.tintColor = .white
             headerView.addSubview(imageHumidity)
         
@@ -159,7 +162,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let humidityLabel = UILabel()
-            humidityLabel.text = "33 %"
+        
+        if let humidity = viewModel.current?.humidity {
+            humidityLabel.text = "\(String(describing: humidity))%"
+        }
             humidityLabel.textColor = .white
             humidityLabel.font = UIFont.systemFont(ofSize: 20)
         
@@ -170,11 +176,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             maker.top.equalTo(tempLabel).inset(30)
         }
         
-        let imageHurricane = UIImageView(image: UIImage(systemName: "hurricane"))
-            imageHurricane.tintColor = .white
-            headerView.addSubview(imageHurricane)
+        let imageWind = UIImageView(image: UIImage(named: "wind"))
+            imageWind.tintColor = .white
+            headerView.addSubview(imageWind)
         
-            imageHurricane.snp.makeConstraints { maker in
+            imageWind.snp.makeConstraints { maker in
                 maker.trailing.equalTo(headerView).inset(120)
                 maker.top.equalTo(imageHumidity).inset(30)
                 maker.height.equalTo(25)
@@ -182,15 +188,17 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
           
         }
         
-        let hurricaneLabel = UILabel()
-            hurricaneLabel.text = "5 м/с"
-            hurricaneLabel.textColor = .white
-            hurricaneLabel.font = UIFont.systemFont(ofSize: 20)
+        let windLabel = UILabel()
+        if let wind =  viewModel.current?.windSpeed, let windDeg = viewModel.current?.windDeg  {
+            windLabel.text = "\(String(describing:Int(wind)))" + "" + "\(String(describing: windDeg))" // указать направление ветра из градусов
+        }
+            windLabel.textColor = .white
+            windLabel.font = UIFont.systemFont(ofSize: 20)
         
-            headerView.addSubview(hurricaneLabel)
+            headerView.addSubview(windLabel)
             
-            hurricaneLabel.snp.makeConstraints { maker in
-            maker.left.equalTo(imageHurricane).inset(40)
+            windLabel.snp.makeConstraints { maker in
+            maker.left.equalTo(imageWind).inset(40)
             maker.top.equalTo(humidityLabel).inset(30)
         }
         

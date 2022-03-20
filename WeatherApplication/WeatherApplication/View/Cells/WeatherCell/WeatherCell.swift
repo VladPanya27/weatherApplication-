@@ -28,29 +28,10 @@ class WeatherCell: UITableViewCell {
     }
     
     func configure(with model: Daily) {
-        self.dayLabel.text = getDayForDate(Date(timeIntervalSince1970: Double(model.dt)))
+        self.dayLabel.text = DateFormatting.getDayForDate(Date(timeIntervalSince1970: Double(model.dt)))
         self.tempLabel.text = "\(Int(model.temp.min - 273.15))°/ \(Int(model.temp.max - 273.15))°"
+        iconImageView.tintColor = .black
+        Icons.configureIcons(with: model, iconImageView: iconImageView)
 
-        model.weather.forEach { if $0.icon.contains("10d") {
-            self.iconImageView.image = UIImage(systemName:"cloud.rain")
-            self.iconImageView.tintColor = .black
-        } else if $0.icon.contains("01d") {
-        self.iconImageView.image = UIImage(systemName:"sun.max")
-        self.iconImageView.tintColor = .black
-        } else {
-        self.iconImageView.image = UIImage(systemName:"cloud.sun")
-        self.iconImageView.tintColor = .black
-        }
-    }
  }
-
-    func getDayForDate(_ date: Date?) -> String {
-        guard let inputDate = date else {
-            return ""
-        }
-
-        let formatter = DateFormatter()
-        formatter.dateFormat = "E" // Monday
-        return formatter.string(from: inputDate)
-    }
 }

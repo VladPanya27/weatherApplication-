@@ -15,6 +15,9 @@ class ViewModelMainController: UIViewController {
     
     let network = NetworkManager()
     
+    var current: Current?
+    var weatherModel:WeatherModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -23,6 +26,9 @@ class ViewModelMainController: UIViewController {
         network.loadWeatherWithLatAndLon(lat: lat, lon: lon) { [weak self] weatherData  in
             if let completData = weatherData?.daily {
                 self?.dailyWeatherModel.append(contentsOf: completData)
+                guard let currentWeather = weatherData?.current else {return}
+                self?.weatherModel = weatherData
+                self?.current = currentWeather
             }
             completion()
         }
