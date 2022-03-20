@@ -33,13 +33,16 @@ class WeatherCell: UITableViewCell {
 
         model.weather.forEach { if $0.icon.contains("10d") {
             self.iconImageView.image = UIImage(systemName:"cloud.rain")
+            self.iconImageView.tintColor = .black
         } else if $0.icon.contains("01d") {
         self.iconImageView.image = UIImage(systemName:"sun.max")
+        self.iconImageView.tintColor = .black
         } else {
         self.iconImageView.image = UIImage(systemName:"cloud.sun")
-            }
+        self.iconImageView.tintColor = .black
         }
     }
+ }
 
     func getDayForDate(_ date: Date?) -> String {
         guard let inputDate = date else {
