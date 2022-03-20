@@ -19,13 +19,23 @@ class DateFormatting {
     return formatter.string(from: inputDate)
     }
     
-    static func getDayForDates(_ date: Date?) -> String {
+    static func getMonthForDates(_ date: Date?) -> String {
     guard let inputDate = date else {
         return ""
     }
 
     let formatter = DateFormatter()
     formatter.dateFormat = "eee, MMM dd" // Monday
+    return formatter.string(from: inputDate)
+    }
+
+    static func getHourlyForDates(_ date: Date?) -> String {
+    guard let inputDate = date else {
+        return ""
+    }
+
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH mm" // Monday
     return formatter.string(from: inputDate)
     }
 }

@@ -16,7 +16,10 @@ class ViewModelMainController: UIViewController {
     let network = NetworkManager()
     
     var current: Current?
+    
     var weatherModel:WeatherModel?
+    
+    var hourly = [Current]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +32,7 @@ class ViewModelMainController: UIViewController {
                 guard let currentWeather = weatherData?.current else {return}
                 self?.weatherModel = weatherData
                 self?.current = currentWeather
+                guard ((self?.hourly = weatherData!.hourly) != nil) else {return}
             }
             completion()
         }

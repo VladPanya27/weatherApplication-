@@ -41,18 +41,36 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
          tableView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
     }
         
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return viewModel.dailyWeatherModel.count
+        if section == 0 {
+            return 1
+        }
+            return viewModel.dailyWeatherModel.count
         }
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:WeatherCell = tableView.dequeueReusableCell(withIdentifier: WeatherCell.identifire, for: indexPath) as! WeatherCell
-        cell.configure(with: viewModel.dailyWeatherModel[indexPath.row])
+        if indexPath.section == 0 {
+        let cell = tableView.dequeueReusableCell(withIdentifier: HourlyCell.identifire, for: indexPath) as! HourlyCell
+            cell.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+
+            cell.configure(with: viewModel.hourly)
+            return cell
+        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: WeatherCell.identifire, for: indexPath) as! WeatherCell
+            cell.configure(with: viewModel.dailyWeatherModel[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        if indexPath.section == 0 {
+            return 145
+        } else {
+            return 60
+        }
     }
 
     func createTableHeader() -> UIView {
@@ -99,7 +117,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         let dayLabel = UILabel()
         if let dt = viewModel.current?.dt {
-            dayLabel.text = DateFormatting.getDayForDates(Date(timeIntervalSince1970: Double(dt)))
+            dayLabel.text = DateFormatting.getMonthForDates(Date(timeIntervalSince1970: Double(dt)))
         }
             dayLabel.textColor = .white
             dayLabel.font = UIFont.systemFont(ofSize: 15)
@@ -120,7 +138,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 maker.left.equalTo(headerView).inset(30)
                 maker.top.equalTo(headerView).inset(100)
                 maker.height.equalTo(120)
-                maker.width.equalTo(180)
+                maker.width.equalTo(140)
           
         }
         
@@ -155,7 +173,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
             imageHumidity.snp.makeConstraints { maker in
                 maker.trailing.equalTo(headerView).inset(120)
-                maker.top.equalTo(imageTemp).inset(30)
+                maker.top.equalTo(imageTemp).inset(35)
                 maker.height.equalTo(25)
                 maker.width.equalTo(25)
           
@@ -173,7 +191,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             
             humidityLabel.snp.makeConstraints { maker in
             maker.left.equalTo(imageHumidity).inset(40)
-            maker.top.equalTo(tempLabel).inset(30)
+            maker.top.equalTo(tempLabel).inset(35)
         }
         
         let imageWind = UIImageView(image: UIImage(named: "wind"))
@@ -182,7 +200,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
             imageWind.snp.makeConstraints { maker in
                 maker.trailing.equalTo(headerView).inset(120)
-                maker.top.equalTo(imageHumidity).inset(30)
+                maker.top.equalTo(imageHumidity).inset(35)
                 maker.height.equalTo(25)
                 maker.width.equalTo(25)
           
@@ -190,7 +208,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         let windLabel = UILabel()
         if let wind =  viewModel.current?.windSpeed, let windDeg = viewModel.current?.windDeg  {
-            windLabel.text = "\(String(describing:Int(wind)))" + "" + "\(String(describing: windDeg))" // указать направление ветра из градусов
+            windLabel.text = "\(String(describing:Int(wind)))" + "м/сек"//+ "\(String(describing: windDeg))" // указать направление ветра из градусов
         }
             windLabel.textColor = .white
             windLabel.font = UIFont.systemFont(ofSize: 20)
@@ -199,7 +217,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             
             windLabel.snp.makeConstraints { maker in
             maker.left.equalTo(imageWind).inset(40)
-            maker.top.equalTo(humidityLabel).inset(30)
+            maker.top.equalTo(humidityLabel).inset(35)
         }
         
         return headerView
