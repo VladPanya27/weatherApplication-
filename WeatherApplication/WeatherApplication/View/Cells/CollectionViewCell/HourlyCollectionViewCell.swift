@@ -34,5 +34,4 @@ class HourlyCollectionViewCell: UICollectionViewCell {
 
         Icons.configureIconsHourly(with: model, iconImageView: iconImageView) // функция по смене иконки
     }
-    
 }

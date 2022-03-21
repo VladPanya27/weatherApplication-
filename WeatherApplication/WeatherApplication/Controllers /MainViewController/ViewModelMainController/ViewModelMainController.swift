@@ -11,15 +11,16 @@ import CoreLocation
 
 class ViewModelMainController: UIViewController {
 
-    var dailyWeatherModel:[Daily] = []
-    
     let network = NetworkManager()
+    
+    var dailyWeatherModel:[Daily] = []
+        
+    var hourly:[Current] = []
     
     var current: Current?
     
     var weatherModel:WeatherModel?
     
-    var hourly = [Current]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,8 @@ class ViewModelMainController: UIViewController {
                 guard let currentWeather = weatherData?.current else {return}
                 self?.weatherModel = weatherData
                 self?.current = currentWeather
-                guard ((self?.hourly = weatherData!.hourly) != nil) else {return}
+                guard let weatherHoutly = weatherData?.hourly else {return}
+                self?.hourly = weatherHoutly 
             }
             completion()
         }

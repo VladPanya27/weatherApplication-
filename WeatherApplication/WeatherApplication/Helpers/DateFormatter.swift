@@ -15,7 +15,7 @@ class DateFormatting {
     }
 
     let formatter = DateFormatter()
-    formatter.dateFormat = "E" // Monday
+    formatter.dateFormat = "E"
     return formatter.string(from: inputDate)
     }
     
@@ -25,7 +25,7 @@ class DateFormatting {
     }
 
     let formatter = DateFormatter()
-    formatter.dateFormat = "eee, MMM dd" // Monday
+    formatter.dateFormat = "eee, MMM dd"
     return formatter.string(from: inputDate)
     }
 
@@ -35,7 +35,7 @@ class DateFormatting {
     }
 
     let formatter = DateFormatter()
-    formatter.dateFormat = "HH mm" // Monday
+    formatter.dateFormat = "HH mm" 
     return formatter.string(from: inputDate)
     }
 }

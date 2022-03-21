@@ -5,6 +5,8 @@
 //  Created by Vlad Panchenko on 18.03.2022.
 //
 
+// По нажатию на ячейку менять цвет текста и показать на главном екране погоду
+
 import UIKit
 import CoreLocation
 import SnapKit
@@ -115,6 +117,18 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
           
         }
         
+        let searchButton = UIButton()
+            searchButton.setImage(UIImage(named: "search"), for: UIControl.State.normal)
+            headerView.addSubview(searchButton)
+        
+                searchButton.snp.makeConstraints { maker in
+                maker.trailing.equalTo(locationButton).inset(40)
+                maker.top.equalTo(headerView).inset(14)
+                maker.height.equalTo(20)
+                maker.width.equalTo(20)
+          
+        }
+        
         let dayLabel = UILabel()
         if let dt = viewModel.current?.dt {
             dayLabel.text = DateFormatting.getMonthForDates(Date(timeIntervalSince1970: Double(dt)))
@@ -207,8 +221,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let windLabel = UILabel()
-        if let wind =  viewModel.current?.windSpeed, let windDeg = viewModel.current?.windDeg  {
-            windLabel.text = "\(String(describing:Int(wind)))" + "м/сек"//+ "\(String(describing: windDeg))" // указать направление ветра из градусов
+        if let wind =  viewModel.current?.windSpeed, let windDeg = Compass.direction(for: Double(viewModel.current!.windDeg)) {
+            windLabel.text = "\(String(describing:Int(wind)))" + "м/сек" + " " + "\(String(describing: windDeg))"
         }
             windLabel.textColor = .white
             windLabel.font = UIFont.systemFont(ofSize: 20)
