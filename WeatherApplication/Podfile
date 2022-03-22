@@ -6,6 +6,8 @@ target 'WeatherApplication' do
   use_frameworks!
 
   # Pods for WeatherApplication
-pod 'Alamofire'
-pod 'SnapKit'
+  pod 'SnapKit'
+  pod 'Alamofire'
+  pod 'GoogleMaps'
+
 end

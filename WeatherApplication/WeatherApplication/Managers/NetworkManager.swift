@@ -7,8 +7,8 @@
 
 import Foundation
 import UIKit
-import Alamofire
 import CoreLocation
+import Alamofire
 
 enum СomponentsOfTheRequest {
     

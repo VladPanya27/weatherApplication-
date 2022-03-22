@@ -9,6 +9,8 @@ import UIKit
 
 class MapViewController: UIViewController {
 
+    @IBOutlet weak var mapView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

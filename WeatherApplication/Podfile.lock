@@ -1,20 +1,28 @@
 PODS:
   - Alamofire (5.4.3)
+  - GoogleMaps (6.1.0):
+    - GoogleMaps/Maps (= 6.1.0)
+  - GoogleMaps/Base (6.1.0)
+  - GoogleMaps/Maps (6.1.0):
+    - GoogleMaps/Base
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
   - Alamofire
+  - GoogleMaps
   - SnapKit
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - GoogleMaps
     - SnapKit
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  GoogleMaps: cffc5d24ce920063aaeebe6ac4dbaaca1dd7f377
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 9fd733b2e19363ce1372ece920ba6789a2bc8fc5
+PODFILE CHECKSUM: 5e520bfcd6d2bee3ebe0e59e1e63e50c1b4223b1
 
 COCOAPODS: 1.11.2
