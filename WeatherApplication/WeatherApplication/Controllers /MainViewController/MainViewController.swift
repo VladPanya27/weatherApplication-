@@ -30,6 +30,7 @@ class MainViewController: UIViewController {
         super.viewDidAppear(animated)
         setupLocation()
         view.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 }
     
@@ -114,7 +115,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 maker.height.equalTo(25)
                 maker.width.equalTo(25)
           
-        }
+                locationButton.addTarget(self, action: #selector(pushMap), for: .touchUpInside)
+            }
         
         let searchButton = UIButton()
             searchButton.setImage(UIImage(named: "search"), for: UIControl.State.normal)
@@ -235,6 +237,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return headerView
+    }
+    
+    @objc func pushMap() {
+        self.navigationController?.pushViewController(MapViewController(), animated: true)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

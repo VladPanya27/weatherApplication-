@@ -45,8 +45,8 @@ class Current: Codable {
     let clouds, visibility: Int
     let windSpeed: Double
     let windDeg: Int
-    let windGust: Double
     let weather: [Weather]
+    let windGust: Double?
     let pop: Int?
 
     enum CodingKeys: String, CodingKey {
@@ -57,11 +57,12 @@ class Current: Codable {
         case uvi, clouds, visibility
         case windSpeed = "wind_speed"
         case windDeg = "wind_deg"
+        case weather
         case windGust = "wind_gust"
-        case weather, pop
+        case pop
     }
 
-    init(dt: Int, sunrise: Int?, sunset: Int?, temp: Double, feelsLike: Double, pressure: Int, humidity: Int, dewPoint: Double, uvi: Double, clouds: Int, visibility: Int, windSpeed: Double, windDeg: Int, windGust: Double, weather: [Weather], pop: Int?) {
+    init(dt: Int, sunrise: Int?, sunset: Int?, temp: Double, feelsLike: Double, pressure: Int, humidity: Int, dewPoint: Double, uvi: Double, clouds: Int, visibility: Int, windSpeed: Double, windDeg: Int, weather: [Weather], windGust: Double?, pop: Int?) {
         self.dt = dt
         self.sunrise = sunrise
         self.sunset = sunset
@@ -75,8 +76,8 @@ class Current: Codable {
         self.visibility = visibility
         self.windSpeed = windSpeed
         self.windDeg = windDeg
-        self.windGust = windGust
         self.weather = weather
+        self.windGust = windGust
         self.pop = pop
     }
 }
