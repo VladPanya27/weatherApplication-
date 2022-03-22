@@ -31,6 +31,6 @@ class HourlyCollectionViewCell: UICollectionViewCell {
         self.iconImageView.contentMode = .scaleAspectFit
         self.iconImageView.tintColor = .white
 
-        Icons.configureIconsHourly(with: model, iconImageView: iconImageView)
+        Icons.configureIconsCurrent(with: model, iconImageView: iconImageView)
     }
 }

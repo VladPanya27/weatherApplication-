@@ -144,7 +144,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         let imageWeather = UIImageView()
             imageWeather.tintColor = .white
-            Icons.configureIcons(with: viewModel.dailyWeatherModel[0], iconImageView: imageWeather)
+            Icons.configureIconsCurrent(with: viewModel.current!, iconImageView: imageWeather)
             headerView.addSubview(imageWeather)
         
             imageWeather.snp.makeConstraints { maker in
@@ -170,6 +170,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         let tempLabel = UILabel()
             tempLabel.text = "\(Int(viewModel.dailyWeatherModel[0].temp.min - 273.15))°/ \(Int(viewModel.dailyWeatherModel[0].temp.max - 273.15))°"
+        
             tempLabel.textColor = .white
             tempLabel.font = UIFont.systemFont(ofSize: 20)
         
