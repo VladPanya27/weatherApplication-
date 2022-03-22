@@ -19,7 +19,6 @@ class HourlyCollectionViewCell: UICollectionViewCell {
     @IBOutlet var tempLabel:UILabel!
     @IBOutlet var hourlyLabel:UILabel!
 
-
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -32,6 +31,6 @@ class HourlyCollectionViewCell: UICollectionViewCell {
         self.iconImageView.contentMode = .scaleAspectFit
         self.iconImageView.tintColor = .white
 
-        Icons.configureIconsHourly(with: model, iconImageView: iconImageView) // функция по смене иконки
+        Icons.configureIconsHourly(with: model, iconImageView: iconImageView)
     }
 }

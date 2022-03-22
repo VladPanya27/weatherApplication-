@@ -74,7 +74,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             return 60
         }
     }
-
+    
     func createTableHeader() -> UIView {
         
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width/1.4))
@@ -83,26 +83,25 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         headerView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
         
         let imageLocation = UIImageView(image: UIImage(named: "icons-location"))
-        
             headerView.addSubview(imageLocation)
         
             imageLocation.snp.makeConstraints { maker in
-            maker.left.equalTo(headerView).inset(10)
-            maker.top.equalTo(headerView).inset(10)
-            maker.height.equalTo(20)
-            maker.width.equalTo(20)
+                maker.left.equalTo(headerView).inset(10)
+                maker.top.equalTo(headerView).inset(10)
+                maker.height.equalTo(20)
+                maker.width.equalTo(20)
         }
 
         let cityLabel = UILabel()
-            cityLabel.text = viewModel.weatherModel?.timezone
+        let city = ReplacingString.replacing(with: viewModel.weatherModel!.timezone)
+            cityLabel.text = city
             cityLabel.textColor = .white
             cityLabel.font = UIFont.systemFont(ofSize: 20)
-        
             headerView.addSubview(cityLabel)
             
             cityLabel.snp.makeConstraints { maker in
-            maker.left.equalTo(imageLocation).inset(30)
-            maker.top.equalTo(imageLocation).inset(0)
+                maker.left.equalTo(imageLocation).inset(30)
+                maker.top.equalTo(imageLocation).inset(0)
         }
         
         let locationButton = UIButton()
@@ -235,6 +234,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
 }
 

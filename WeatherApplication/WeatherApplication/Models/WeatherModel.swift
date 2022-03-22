@@ -5,12 +5,6 @@
 //  Created by Vlad Panchenko on 18.03.2022.
 //
 
-
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
-//
-//   let weatherModel = try? newJSONDecoder().decode(WeatherModel.self, from: jsonData)
-
 import Foundation
 
 // MARK: - WeatherModel
@@ -51,8 +45,8 @@ class Current: Codable {
     let clouds, visibility: Int
     let windSpeed: Double
     let windDeg: Int
+    let windGust: Double
     let weather: [Weather]
-    let windGust: Double?
     let pop: Int?
 
     enum CodingKeys: String, CodingKey {
@@ -63,12 +57,11 @@ class Current: Codable {
         case uvi, clouds, visibility
         case windSpeed = "wind_speed"
         case windDeg = "wind_deg"
-        case weather
         case windGust = "wind_gust"
-        case pop
+        case weather, pop
     }
 
-    init(dt: Int, sunrise: Int?, sunset: Int?, temp: Double, feelsLike: Double, pressure: Int, humidity: Int, dewPoint: Double, uvi: Double, clouds: Int, visibility: Int, windSpeed: Double, windDeg: Int, weather: [Weather], windGust: Double?, pop: Int?) {
+    init(dt: Int, sunrise: Int?, sunset: Int?, temp: Double, feelsLike: Double, pressure: Int, humidity: Int, dewPoint: Double, uvi: Double, clouds: Int, visibility: Int, windSpeed: Double, windDeg: Int, windGust: Double, weather: [Weather], pop: Int?) {
         self.dt = dt
         self.sunrise = sunrise
         self.sunset = sunset
@@ -82,8 +75,8 @@ class Current: Codable {
         self.visibility = visibility
         self.windSpeed = windSpeed
         self.windDeg = windDeg
-        self.weather = weather
         self.windGust = windGust
+        self.weather = weather
         self.pop = pop
     }
 }
@@ -112,12 +105,14 @@ class Weather: Codable {
 enum Main: String, Codable {
     case clear = "Clear"
     case clouds = "Clouds"
+    case rain = "Rain"
 }
 
 enum Description: String, Codable {
     case brokenClouds = "broken clouds"
     case clearSky = "clear sky"
     case fewClouds = "few clouds"
+    case heavyIntensityRain = "heavy intensity rain"
     case overcastClouds = "overcast clouds"
     case scatteredClouds = "scattered clouds"
 }
@@ -136,6 +131,7 @@ class Daily: Codable {
     let weather: [Weather]
     let clouds: Int
     let pop, uvi: Double
+    let rain: Double?
 
     enum CodingKeys: String, CodingKey {
         case dt, sunrise, sunset, moonrise, moonset
@@ -147,10 +143,10 @@ class Daily: Codable {
         case windSpeed = "wind_speed"
         case windDeg = "wind_deg"
         case windGust = "wind_gust"
-        case weather, clouds, pop, uvi
+        case weather, clouds, pop, uvi, rain
     }
 
-    init(dt: Int, sunrise: Int, sunset: Int, moonrise: Int, moonset: Int, moonPhase: Double, temp: Temp, feelsLike: FeelsLike, pressure: Int, humidity: Int, dewPoint: Double, windSpeed: Double, windDeg: Int, windGust: Double, weather: [Weather], clouds: Int, pop: Double, uvi: Double) {
+    init(dt: Int, sunrise: Int, sunset: Int, moonrise: Int, moonset: Int, moonPhase: Double, temp: Temp, feelsLike: FeelsLike, pressure: Int, humidity: Int, dewPoint: Double, windSpeed: Double, windDeg: Int, windGust: Double, weather: [Weather], clouds: Int, pop: Double, uvi: Double, rain: Double?) {
         self.dt = dt
         self.sunrise = sunrise
         self.sunset = sunset
@@ -169,6 +165,7 @@ class Daily: Codable {
         self.clouds = clouds
         self.pop = pop
         self.uvi = uvi
+        self.rain = rain
     }
 }
 
