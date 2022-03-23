@@ -128,7 +128,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 maker.top.equalTo(headerView).inset(14)
                 maker.height.equalTo(20)
                 maker.width.equalTo(20)
-          
+            
+            searchButton.addTarget(self, action: #selector(presentSearch), for: .touchUpInside)
+
         }
         
         let dayLabel = UILabel()
@@ -260,6 +262,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             self.present(mapViewController, animated: true, completion: nil)
     }
     
+    @objc func presentSearch() {
+        
+        let searchViewController = SearchViewController()
+        
+        self.present(searchViewController, animated: true, completion: nil)
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }

@@ -31,15 +31,12 @@ class NetworkManager {
         
         let request = СomponentsOfTheRequest.baseUrl.component + СomponentsOfTheRequest.path.component + СomponentsOfTheRequest.lat.component + "\(lat)" + СomponentsOfTheRequest.lon.component + "\(lon)" + СomponentsOfTheRequest.keyApi.component
         
-        print(request)
-        AF.request(request).responseJSON { data in
-            print(data)
-        }
         AF.request(request) .validate()
            .responseDecodable(of:WeatherModel.self) { weather in
-            guard weather.error == nil else { return print(weather.error) }
+            guard weather.error == nil else { return }
             if let data = weather.value {
-                        completion(data)
+            
+                completion(data)
             }
         }
     }

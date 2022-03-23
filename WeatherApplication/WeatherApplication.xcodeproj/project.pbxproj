@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000C55B927EB8F4200382081 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C55B727EB8F4200382081 /* SearchViewController.swift */; };
+		000C55BA27EB8F4200382081 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 000C55B827EB8F4200382081 /* SearchViewController.xib */; };
+		000C55BE27EB913B00382081 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C55BC27EB913B00382081 /* ResultViewController.swift */; };
+		000C55BF27EB913B00382081 /* ResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 000C55BD27EB913B00382081 /* ResultViewController.xib */; };
 		0071540427E506C7000610D0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071540327E506C7000610D0 /* NetworkManager.swift */; };
 		0071540A27E793F5000610D0 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071540927E793F5000610D0 /* DateFormatter.swift */; };
 		0071540C27E79F34000610D0 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071540B27E79F34000610D0 /* Icons.swift */; };
@@ -33,6 +37,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		000C55B727EB8F4200382081 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		000C55B827EB8F4200382081 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		000C55BC27EB913B00382081 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		000C55BD27EB913B00382081 /* ResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultViewController.xib; sourceTree = "<group>"; };
 		0071540327E506C7000610D0 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0071540927E793F5000610D0 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		0071540B27E79F34000610D0 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
@@ -77,8 +85,19 @@
 		000C55B627EB8E2700382081 /* SearchViewController */ = {
 			isa = PBXGroup;
 			children = (
+				000C55B727EB8F4200382081 /* SearchViewController.swift */,
+				000C55B827EB8F4200382081 /* SearchViewController.xib */,
 			);
 			path = SearchViewController;
+			sourceTree = "<group>";
+		};
+		000C55BB27EB910D00382081 /* ResultViewController */ = {
+			isa = PBXGroup;
+			children = (
+				000C55BC27EB913B00382081 /* ResultViewController.swift */,
+				000C55BD27EB913B00382081 /* ResultViewController.xib */,
+			);
+			path = ResultViewController;
 			sourceTree = "<group>";
 		};
 		0071540227E506A0000610D0 /* Managers */ = {
@@ -147,6 +166,7 @@
 		0072F2D427E4A07400DDB6BB /* Controllers  */ = {
 			isa = PBXGroup;
 			children = (
+				000C55BB27EB910D00382081 /* ResultViewController */,
 				000C55B627EB8E2700382081 /* SearchViewController */,
 				0074049827E9CA85000DA155 /* MapViewController */,
 				0072F2D927E4A10600DDB6BB /* MainViewController */,
@@ -317,6 +337,8 @@
 				0072F2CA27E4864400DDB6BB /* Assets.xcassets in Resources */,
 				0074049C27E9CAB7000DA155 /* MapViewController.xib in Resources */,
 				0072F2EB27E4ABF300DDB6BB /* HourlyCell.xib in Resources */,
+				000C55BA27EB8F4200382081 /* SearchViewController.xib in Resources */,
+				000C55BF27EB913B00382081 /* ResultViewController.xib in Resources */,
 				0071541127E7A94F000610D0 /* HourlyCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -395,8 +417,10 @@
 				0072F2E527E4AB4D00DDB6BB /* WeatherCell.swift in Sources */,
 				0072F2C127E4864400DDB6BB /* AppDelegate.swift in Sources */,
 				0071540427E506C7000610D0 /* NetworkManager.swift in Sources */,
+				000C55BE27EB913B00382081 /* ResultViewController.swift in Sources */,
 				0072F2EA27E4ABF300DDB6BB /* HourlyCell.swift in Sources */,
 				0072F2C327E4864400DDB6BB /* SceneDelegate.swift in Sources */,
+				000C55B927EB8F4200382081 /* SearchViewController.swift in Sources */,
 				0071540C27E79F34000610D0 /* Icons.swift in Sources */,
 				0074049627E9B90F000DA155 /* replacingString.swift in Sources */,
 				0072F2DF27E4A97A00DDB6BB /* WeatherModel.swift in Sources */,
