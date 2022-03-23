@@ -154,7 +154,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 maker.left.equalTo(headerView).inset(30)
                 maker.top.equalTo(headerView).inset(100)
                 maker.height.equalTo(120)
-                maker.width.equalTo(140)
+                maker.width.equalTo(170)
           
         }
         

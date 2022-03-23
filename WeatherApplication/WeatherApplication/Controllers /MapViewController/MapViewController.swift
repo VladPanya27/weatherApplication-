@@ -67,7 +67,7 @@ class MapViewController: UIViewController {
         }
     }
     
-    @IBAction func selectButtom(_ sender: Any) {
+    @IBAction func selectAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         completion?(currentCoordinate)
     }
@@ -102,5 +102,4 @@ extension MapViewController: GMSMapViewDelegate {
         self.currentCoordinate = coordinate
         reverseGeocode()
     }
-
 }

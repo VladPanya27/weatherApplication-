@@ -74,6 +74,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		000C55B627EB8E2700382081 /* SearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SearchViewController;
+			sourceTree = "<group>";
+		};
 		0071540227E506A0000610D0 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +147,7 @@
 		0072F2D427E4A07400DDB6BB /* Controllers  */ = {
 			isa = PBXGroup;
 			children = (
+				000C55B627EB8E2700382081 /* SearchViewController */,
 				0074049827E9CA85000DA155 /* MapViewController */,
 				0072F2D927E4A10600DDB6BB /* MainViewController */,
 			);
