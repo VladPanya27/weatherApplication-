@@ -9,5 +9,5 @@ target 'WeatherApplication' do
   pod 'SnapKit'
   pod 'Alamofire'
   pod 'GoogleMaps'
-
+  pod 'GooglePlaces'
 end

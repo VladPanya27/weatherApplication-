@@ -31,8 +31,18 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         view.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+
 }
     
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
@@ -266,7 +276,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         let searchViewController = SearchViewController()
         
-        self.present(searchViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(searchViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
