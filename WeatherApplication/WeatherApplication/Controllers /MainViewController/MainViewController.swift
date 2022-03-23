@@ -16,19 +16,20 @@ class MainViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
         
     let viewModel = ViewModelMainController()
-    
+        
     let locationManager = CLLocationManager()
 
     var currentLocation: CLLocation?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareTableView()
+        requestLocation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupLocation()
         view.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
@@ -94,7 +95,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         let cityLabel = UILabel()
-        let city = ReplacingString.replacing(with: viewModel.weatherModel!.timezone)
+        let city = ReplacingString.replacing(with: viewModel.weatherModel!.timezone!)
             cityLabel.text = city
             cityLabel.textColor = .white
             cityLabel.font = UIFont.systemFont(ofSize: 20)
@@ -115,7 +116,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 maker.height.equalTo(25)
                 maker.width.equalTo(25)
           
-                locationButton.addTarget(self, action: #selector(pushMap), for: .touchUpInside)
+                locationButton.addTarget(self, action: #selector(presentMap), for: .touchUpInside)
             }
         
         let searchButton = UIButton()
@@ -171,7 +172,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let tempLabel = UILabel()
-            tempLabel.text = "\(Int(viewModel.dailyWeatherModel[0].temp.min - 273.15))°/ \(Int(viewModel.dailyWeatherModel[0].temp.max - 273.15))°"
+        tempLabel.text = "\(Int((viewModel.dailyWeatherModel[0].temp?.min!)! - 273.15))°/ \(Int((viewModel.dailyWeatherModel[0].temp?.max!)! - 273.15))°"
         
             tempLabel.textColor = .white
             tempLabel.font = UIFont.systemFont(ofSize: 20)
@@ -223,7 +224,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let windLabel = UILabel()
-        if let wind =  viewModel.current?.windSpeed, let windDeg = Compass.direction(for: Double(viewModel.current!.windDeg)) {
+        if let wind =  viewModel.current?.windSpeed, let windDeg = Compass.direction(for: Double(viewModel.current!.windDeg!)) {
             windLabel.text = "\(String(describing:Int(wind)))" + "м/сек" + " " + "\(String(describing: windDeg))"
         }
             windLabel.textColor = .white
@@ -239,44 +240,50 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return headerView
     }
     
-    @objc func pushMap() {
-        self.navigationController?.pushViewController(MapViewController(), animated: true)
+    func reloadTable() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.tableView.tableHeaderView = self.createTableHeader()
+        }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    @objc func presentMap() {
         
+        let mapViewController = MapViewController()
+            mapViewController.modalPresentationStyle = .fullScreen
+        
+        mapViewController.completion = { [weak self] model in
+            self?.viewModel.loadDataWeather(lat: model.latitude, lon: model.longitude) {
+            self?.reloadTable()
+            }
+        }
+            self.present(mapViewController, animated: true, completion: nil)
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
 }
 
 extension MainViewController: CLLocationManagerDelegate {
     
-    func setupLocation() {
-         locationManager.delegate = self
-         locationManager.requestWhenInUseAuthorization()
-         locationManager.startUpdatingLocation()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if !locations.isEmpty, currentLocation == nil {
-            currentLocation = locations.first
-            locationManager.stopUpdatingLocation()
+    func requestLocation() {
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
             requestWeatherForLocation()
         }
     }
     
     func requestWeatherForLocation() {
-         guard let currentLocation = currentLocation else {
-            return
-        }
         
-        let lon = currentLocation.coordinate.longitude
-        let lat = currentLocation.coordinate.latitude
-        
-        viewModel.loadDataWeather(lat: lat, lon: lon) {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.tableView.tableHeaderView = self.createTableHeader()
-            }
+        guard let coordinate = locationManager.location?.coordinate else {return}
+        viewModel.loadDataWeather(lat:coordinate.latitude , lon: coordinate.longitude) { [weak self]  in
+            self?.reloadTable()
         }
     }
 }

@@ -28,8 +28,10 @@ class WeatherCell: UITableViewCell {
     }
     
     func configure(with model: Daily) {
-        self.dayLabel.text = DateFormatting.getDayForDate(Date(timeIntervalSince1970: Double(model.dt)))
-        self.tempLabel.text = "\(Int(model.temp.min - 273.15))°/ \(Int(model.temp.max - 273.15))°"
+        guard let dt = model.dt else {return}
+        guard let max = model.temp?.max, let min = model.temp?.min else {return}
+        self.dayLabel.text = DateFormatting.getDayForDate(Date(timeIntervalSince1970: Double(dt)))
+        self.tempLabel.text = "\(Int(min - 273.15))°/ \(Int(max - 273.15))°"
         iconImageView.tintColor = .black
         Icons.configureIconsDaily(with: model, iconImageView: iconImageView)
 

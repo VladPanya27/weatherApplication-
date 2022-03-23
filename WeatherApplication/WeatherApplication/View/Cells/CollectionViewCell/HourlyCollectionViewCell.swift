@@ -24,9 +24,11 @@ class HourlyCollectionViewCell: UICollectionViewCell {
     }
 
     func configure(with model: Current) {
-        self.hourlyLabel.text = DateFormatting.getHourlyForDates(Date(timeIntervalSince1970: Double(model.dt)))
+        guard let dt = model.dt else {return}
+        guard let temp = model.temp else {return}
+        self.hourlyLabel.text = DateFormatting.getHourlyForDates(Date(timeIntervalSince1970: Double(dt)))
         self.hourlyLabel.textColor = .white
-        self.tempLabel.text = "\(Int(model.temp - 273.15))°"
+        self.tempLabel.text = "\(Int(temp - 273.15))°"
         self.tempLabel.textColor = .white
         self.iconImageView.contentMode = .scaleAspectFit
         self.iconImageView.tintColor = .white

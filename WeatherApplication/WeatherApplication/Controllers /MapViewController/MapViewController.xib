@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController" customModule="WeatherApplication" customModuleProvider="target">
             <connections>
+                <outlet property="label" destination="1Dw-sn-DHk" id="XZe-iC-150"/>
                 <outlet property="mapView" destination="FmM-Vt-B7W" id="2KH-bi-vyS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -20,19 +21,51 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FmM-Vt-B7W">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mmr-F8-rfh">
+                    <rect key="frame" x="0.0" y="746" width="414" height="150"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Dw-sn-DHk">
+                            <rect key="frame" x="20" y="12" width="374" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFk-Zw-IQd">
+                            <rect key="frame" x="20" y="37.5" width="374" height="72.5"/>
+                            <state key="normal" title="Select"/>
+                            <connections>
+                                <action selector="selectButtom:" destination="-1" eventType="touchUpInside" id="x1l-bT-trW"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="TFk-Zw-IQd" firstAttribute="top" secondItem="1Dw-sn-DHk" secondAttribute="bottom" constant="5" id="0x6-aU-mqu"/>
+                        <constraint firstItem="1Dw-sn-DHk" firstAttribute="top" secondItem="Mmr-F8-rfh" secondAttribute="top" constant="12" id="3j1-eK-BHo"/>
+                        <constraint firstAttribute="bottom" secondItem="TFk-Zw-IQd" secondAttribute="bottom" constant="40" id="9Qa-jf-Gf1"/>
+                        <constraint firstItem="1Dw-sn-DHk" firstAttribute="leading" secondItem="Mmr-F8-rfh" secondAttribute="leading" constant="20" id="SM1-W2-ntO"/>
+                        <constraint firstAttribute="height" constant="150" id="Zy2-of-YUA"/>
+                        <constraint firstAttribute="trailing" secondItem="TFk-Zw-IQd" secondAttribute="trailing" constant="20" id="j28-4a-hLg"/>
+                        <constraint firstItem="TFk-Zw-IQd" firstAttribute="leading" secondItem="Mmr-F8-rfh" secondAttribute="leading" constant="20" id="pFl-c1-dy7"/>
+                        <constraint firstAttribute="trailing" secondItem="1Dw-sn-DHk" secondAttribute="trailing" constant="20" id="s0F-Mu-vD4"/>
+                    </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemGray3Color"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="FmM-Vt-B7W" secondAttribute="bottom" id="NQk-Y3-rJu"/>
+                <constraint firstAttribute="bottom" secondItem="FmM-Vt-B7W" secondAttribute="bottom" id="NQk-Y3-rJu"/>
                 <constraint firstItem="FmM-Vt-B7W" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="PrT-0F-PyJ"/>
-                <constraint firstItem="FmM-Vt-B7W" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Y8D-8o-f3H"/>
+                <constraint firstItem="FmM-Vt-B7W" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Y8D-8o-f3H"/>
+                <constraint firstItem="Mmr-F8-rfh" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="ZWk-AN-WnK"/>
+                <constraint firstItem="Mmr-F8-rfh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="c7b-Ug-fuM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FmM-Vt-B7W" secondAttribute="trailing" id="eeY-eO-X3p"/>
+                <constraint firstAttribute="bottom" secondItem="Mmr-F8-rfh" secondAttribute="bottom" id="qRL-4o-nci"/>
             </constraints>
-            <point key="canvasLocation" x="104" y="63"/>
+            <point key="canvasLocation" x="102.89855072463769" y="62.946428571428569"/>
         </view>
     </objects>
     <resources>
