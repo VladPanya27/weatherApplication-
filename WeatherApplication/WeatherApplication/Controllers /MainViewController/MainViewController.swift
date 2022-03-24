@@ -5,8 +5,6 @@
 //  Created by Vlad Panchenko on 18.03.2022.
 //
 
-// По нажатию на ячейку менять цвет текста и показать на главном екране погоду
-
 import UIKit
 import CoreLocation
 import SnapKit
@@ -76,7 +74,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: WeatherCell.identifire, for: indexPath) as! WeatherCell
             cell.configure(with: viewModel.dailyWeatherModel[indexPath.row])
-        return cell
+            return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -105,7 +103,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         let cityLabel = UILabel()
-        let city = ReplacingString.replacing(with: viewModel.weatherModel!.timezone!)
+        if let city = ReplacingString.replacing(with: (viewModel.weatherModel?.timezone)!) {
             cityLabel.text = city
             cityLabel.textColor = .white
             cityLabel.font = UIFont.systemFont(ofSize: 20)
@@ -115,7 +113,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 maker.left.equalTo(imageLocation).inset(30)
                 maker.top.equalTo(imageLocation).inset(0)
         }
-        
+    }
+    
         let locationButton = UIButton()
             locationButton.setImage(UIImage(named: "-gps"), for: UIControl.State.normal)
             headerView.addSubview(locationButton)
@@ -133,7 +132,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             searchButton.setImage(UIImage(named: "search"), for: UIControl.State.normal)
             headerView.addSubview(searchButton)
         
-                searchButton.snp.makeConstraints { maker in
+            searchButton.snp.makeConstraints { maker in
                 maker.trailing.equalTo(locationButton).inset(40)
                 maker.top.equalTo(headerView).inset(14)
                 maker.height.equalTo(20)
@@ -153,8 +152,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             headerView.addSubview(dayLabel)
             
             dayLabel.snp.makeConstraints { maker in
-            maker.left.equalTo(imageLocation).inset(10)
-            maker.top.equalTo(imageLocation).inset(40)
+                maker.left.equalTo(imageLocation).inset(10)
+                maker.top.equalTo(imageLocation).inset(40)
         }
         
         let imageWeather = UIImageView()
@@ -167,11 +166,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 maker.top.equalTo(headerView).inset(100)
                 maker.height.equalTo(120)
                 maker.width.equalTo(170)
-          
         }
         
         let imageTemp = UIImageView(image: UIImage(systemName: "thermometer"))
-            
             imageTemp.tintColor = .white
             headerView.addSubview(imageTemp)
         
@@ -180,22 +177,23 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 maker.top.equalTo(headerView).inset(120)
                 maker.height.equalTo(25)
                 maker.width.equalTo(25)
-          
         }
         
         let tempLabel = UILabel()
-        tempLabel.text = "\(Int((viewModel.dailyWeatherModel[0].temp?.min!)! - 273.15))°/ \(Int((viewModel.dailyWeatherModel[0].temp?.max!)! - 273.15))°"
-        
+        if let tempMin = viewModel.dailyWeatherModel[0].temp?.min, let tempMax = viewModel.dailyWeatherModel[0].temp?.max  {
+            tempLabel.text = "\(Int((tempMin) - 273.15))°/ \(Int((tempMax) - 273.15))°"
+            
             tempLabel.textColor = .white
             tempLabel.font = UIFont.systemFont(ofSize: 20)
         
             headerView.addSubview(tempLabel)
             
             tempLabel.snp.makeConstraints { maker in
-            maker.left.equalTo(imageTemp).inset(40)
-            maker.top.equalTo(headerView).inset(120)
+                maker.left.equalTo(imageTemp).inset(40)
+                maker.top.equalTo(headerView).inset(120)
         }
-        
+    }
+    
         let imageHumidity = UIImageView(image: UIImage(named: "humidity"))
             imageHumidity.tintColor = .white
             headerView.addSubview(imageHumidity)
@@ -209,7 +207,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let humidityLabel = UILabel()
-        
         if let humidity = viewModel.current?.humidity {
             humidityLabel.text = "\(String(describing: humidity))%"
         }
@@ -219,8 +216,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             headerView.addSubview(humidityLabel)
             
             humidityLabel.snp.makeConstraints { maker in
-            maker.left.equalTo(imageHumidity).inset(40)
-            maker.top.equalTo(tempLabel).inset(35)
+                maker.left.equalTo(imageHumidity).inset(40)
+                maker.top.equalTo(tempLabel).inset(35)
         }
         
         let imageWind = UIImageView(image: UIImage(named: "wind"))
@@ -232,7 +229,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 maker.top.equalTo(imageHumidity).inset(35)
                 maker.height.equalTo(25)
                 maker.width.equalTo(25)
-          
         }
         
         let windLabel = UILabel()
@@ -245,15 +241,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             headerView.addSubview(windLabel)
             
             windLabel.snp.makeConstraints { maker in
-            maker.left.equalTo(imageWind).inset(40)
-            maker.top.equalTo(humidityLabel).inset(35)
+                maker.left.equalTo(imageWind).inset(40)
+                maker.top.equalTo(humidityLabel).inset(35)
         }
         
         return headerView
     }
     
     func reloadTable() {
-        DispatchQueue.main.async {
+         DispatchQueue.main.async {
             self.tableView.reloadData()
             self.tableView.tableHeaderView = self.createTableHeader()
         }
@@ -280,6 +276,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
     }
 }
 

@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 class Icons {
-    static func configureIconsDaily(with model: Daily, iconImageView: UIImageView ) {
+    static func configureIconsDaily(with model: Daily?, iconImageView: UIImageView ) {
+        guard let model = model else {return}
 
         model.weather!.forEach { if $0.icon!.contains("10d") {
             iconImageView.image = UIImage(systemName:"cloud.rain")
@@ -21,8 +22,8 @@ class Icons {
     }
  }
 
-    static func configureIconsCurrent(with model: Current, iconImageView: UIImageView ) {
-        
+    static func configureIconsCurrent(with model: Current?, iconImageView: UIImageView ) {
+        guard let model = model else {return}
         
         model.weather!.forEach { if $0.icon!.contains("10d") {
             iconImageView.image = UIImage(systemName:"cloud.rain")

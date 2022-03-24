@@ -10,7 +10,7 @@ import Foundation
 // MARK: - WeatherModel
 class WeatherModel: Codable {
     let lat, lon: Double?
-    let timezone: String?
+    var timezone: String?
     let timezoneOffset: Int?
     let current: Current?
     let minutely: [Minutely]?

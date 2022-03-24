@@ -9,7 +9,7 @@ import Foundation
 
 class ReplacingString {
     
-    static func replacing(with city: String) -> String {
+    static func replacing(with city: String) -> String? {
         let city = city.replacingOccurrences(of: "/", with: ", ").replacingOccurrences(of: "_", with: " ")
     
         return city

@@ -11,6 +11,8 @@
 		000C55BA27EB8F4200382081 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 000C55B827EB8F4200382081 /* SearchViewController.xib */; };
 		000C55BE27EB913B00382081 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C55BC27EB913B00382081 /* ResultViewController.swift */; };
 		000C55BF27EB913B00382081 /* ResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 000C55BD27EB913B00382081 /* ResultViewController.xib */; };
+		000C55C727EBAF7000382081 /* GooglePalcesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C55C627EBAF7000382081 /* GooglePalcesManager.swift */; };
+		000C55C927EBB26E00382081 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C55C827EBB26E00382081 /* Place.swift */; };
 		0071540427E506C7000610D0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071540327E506C7000610D0 /* NetworkManager.swift */; };
 		0071540A27E793F5000610D0 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071540927E793F5000610D0 /* DateFormatter.swift */; };
 		0071540C27E79F34000610D0 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071540B27E79F34000610D0 /* Icons.swift */; };
@@ -41,6 +43,8 @@
 		000C55B827EB8F4200382081 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		000C55BC27EB913B00382081 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		000C55BD27EB913B00382081 /* ResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultViewController.xib; sourceTree = "<group>"; };
+		000C55C627EBAF7000382081 /* GooglePalcesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePalcesManager.swift; sourceTree = "<group>"; };
+		000C55C827EBB26E00382081 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		0071540327E506C7000610D0 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0071540927E793F5000610D0 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		0071540B27E79F34000610D0 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
@@ -104,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				0071540327E506C7000610D0 /* NetworkManager.swift */,
+				000C55C627EBAF7000382081 /* GooglePalcesManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -196,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				0072F2DE27E4A97A00DDB6BB /* WeatherModel.swift */,
+				000C55C827EBB26E00382081 /* Place.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -410,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0071540A27E793F5000610D0 /* DateFormatter.swift in Sources */,
+				000C55C927EBB26E00382081 /* Place.swift in Sources */,
 				0072F2D727E4A0E600DDB6BB /* MainViewController.swift in Sources */,
 				0071541027E7A94F000610D0 /* HourlyCollectionViewCell.swift in Sources */,
 				0072F2DC27E4A17300DDB6BB /* ViewModelMainController.swift in Sources */,
@@ -425,6 +432,7 @@
 				0074049627E9B90F000DA155 /* replacingString.swift in Sources */,
 				0072F2DF27E4A97A00DDB6BB /* WeatherModel.swift in Sources */,
 				0074049F27E9CAF0000DA155 /* ViewModelMapViewController.swift in Sources */,
+				000C55C727EBAF7000382081 /* GooglePalcesManager.swift in Sources */,
 				0074049B27E9CAB7000DA155 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,10 +503,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -552,7 +560,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
