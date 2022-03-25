@@ -47,7 +47,6 @@ class HourlyCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyCollectionViewCell.identifire, for: indexPath) as! HourlyCollectionViewCell
             cell.configure(with: models[indexPath.row])
-
         
         return cell
     }

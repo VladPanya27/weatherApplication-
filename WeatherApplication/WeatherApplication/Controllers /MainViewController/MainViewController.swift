@@ -9,16 +9,27 @@ import UIKit
 import CoreLocation
 import SnapKit
 
-class MainViewController: UIViewController {
-
+class MainViewController: UIViewController  {
+ 
     @IBOutlet weak var tableView: UITableView!
-        
+    
+    let dayLabel = UILabel()
+    
+    let tempLabel = UILabel()
+    
+    let humidityLabel = UILabel()
+    
+    let windLabel = UILabel()
+    
+    let timezoneLabel = UILabel()
+    
+    let weatherImage = UIImageView()
+    
     let viewModel = ViewModelMainController()
         
     let locationManager = CLLocationManager()
 
     var currentLocation: CLLocation?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,16 +92,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             return 145
         } else {
-            return 60
+            return 70
         }
     }
     
     func createTableHeader() -> UIView {
         
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width/1.4))
-            
-
-        headerView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+          
+            headerView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
         
         let imageLocation = UIImageView(image: UIImage(named: "icons-location"))
             headerView.addSubview(imageLocation)
@@ -102,14 +112,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 maker.width.equalTo(20)
         }
 
-        let cityLabel = UILabel()
-        if let city = ReplacingString.replacing(with: (viewModel.weatherModel?.timezone)!) {
-            cityLabel.text = city
-            cityLabel.textColor = .white
-            cityLabel.font = UIFont.systemFont(ofSize: 20)
-            headerView.addSubview(cityLabel)
+        if let timezone = ReplacingString.replacing(with: (viewModel.weatherModel?.timezone)!) {
+            timezoneLabel.text = timezone
+            timezoneLabel.textColor = .white
+            timezoneLabel.font = UIFont.systemFont(ofSize: 20)
+            headerView.addSubview(timezoneLabel)
             
-            cityLabel.snp.makeConstraints { maker in
+            timezoneLabel.snp.makeConstraints { maker in
                 maker.left.equalTo(imageLocation).inset(30)
                 maker.top.equalTo(imageLocation).inset(0)
         }
@@ -142,30 +151,28 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
         }
         
-        let dayLabel = UILabel()
-        if let dt = viewModel.current?.dt {
-            dayLabel.text = DateFormatting.getMonthForDates(Date(timeIntervalSince1970: Double(dt)))
+        if let data = viewModel.current?.dt {
+            self.dayLabel.text = DateFormatting.getMonthForDates(Date(timeIntervalSince1970: Double(data)))
         }
-            dayLabel.textColor = .white
-            dayLabel.font = UIFont.systemFont(ofSize: 15)
+            self.dayLabel.textColor = .white
+            self.dayLabel.font = UIFont.systemFont(ofSize: 15)
         
             headerView.addSubview(dayLabel)
             
-            dayLabel.snp.makeConstraints { maker in
+            self.dayLabel.snp.makeConstraints { maker in
                 maker.left.equalTo(imageLocation).inset(10)
                 maker.top.equalTo(imageLocation).inset(40)
         }
+
+            self.weatherImage.tintColor = .white
+            Icons.configureIconsCurrentWeather(with: viewModel.current!, iconImageView: self.weatherImage)
+            headerView.addSubview(self.weatherImage)
         
-        let imageWeather = UIImageView()
-            imageWeather.tintColor = .white
-            Icons.configureIconsCurrent(with: viewModel.current!, iconImageView: imageWeather)
-            headerView.addSubview(imageWeather)
-        
-            imageWeather.snp.makeConstraints { maker in
+            self.weatherImage.snp.makeConstraints { maker in
                 maker.left.equalTo(headerView).inset(30)
                 maker.top.equalTo(headerView).inset(100)
                 maker.height.equalTo(120)
-                maker.width.equalTo(170)
+                maker.width.equalTo(150)
         }
         
         let imageTemp = UIImageView(image: UIImage(systemName: "thermometer"))
@@ -179,12 +186,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 maker.width.equalTo(25)
         }
         
-        let tempLabel = UILabel()
         if let tempMin = viewModel.dailyWeatherModel[0].temp?.min, let tempMax = viewModel.dailyWeatherModel[0].temp?.max  {
-            tempLabel.text = "\(Int((tempMin) - 273.15))°/ \(Int((tempMax) - 273.15))°"
+            self.tempLabel.text = "\(Int((tempMin) - 273.15))°/ \(Int((tempMax) - 273.15))°"
             
-            tempLabel.textColor = .white
-            tempLabel.font = UIFont.systemFont(ofSize: 20)
+            self.tempLabel.textColor = .white
+            self.tempLabel.font = UIFont.systemFont(ofSize: 20)
         
             headerView.addSubview(tempLabel)
             
@@ -194,11 +200,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-        let imageHumidity = UIImageView(image: UIImage(named: "humidity"))
-            imageHumidity.tintColor = .white
-            headerView.addSubview(imageHumidity)
+        let himidityImage = UIImageView(image: UIImage(named: "humidity"))
+            himidityImage.tintColor = .white
+            headerView.addSubview(himidityImage)
         
-            imageHumidity.snp.makeConstraints { maker in
+            himidityImage.snp.makeConstraints { maker in
                 maker.trailing.equalTo(headerView).inset(120)
                 maker.top.equalTo(imageTemp).inset(35)
                 maker.height.equalTo(25)
@@ -206,42 +212,40 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
           
         }
         
-        let humidityLabel = UILabel()
         if let humidity = viewModel.current?.humidity {
-            humidityLabel.text = "\(String(describing: humidity))%"
+            self.humidityLabel.text = "\(String(describing: humidity))%"
         }
-            humidityLabel.textColor = .white
-            humidityLabel.font = UIFont.systemFont(ofSize: 20)
+            self.humidityLabel.textColor = .white
+            self.humidityLabel.font = UIFont.systemFont(ofSize: 20)
         
             headerView.addSubview(humidityLabel)
             
-            humidityLabel.snp.makeConstraints { maker in
-                maker.left.equalTo(imageHumidity).inset(40)
+            self.humidityLabel.snp.makeConstraints { maker in
+                maker.left.equalTo(himidityImage).inset(40)
                 maker.top.equalTo(tempLabel).inset(35)
         }
         
-        let imageWind = UIImageView(image: UIImage(named: "wind"))
-            imageWind.tintColor = .white
-            headerView.addSubview(imageWind)
+        let windImage = UIImageView(image: UIImage(named: "wind"))
+            windImage.tintColor = .white
+            headerView.addSubview(windImage)
         
-            imageWind.snp.makeConstraints { maker in
+            windImage.snp.makeConstraints { maker in
                 maker.trailing.equalTo(headerView).inset(120)
-                maker.top.equalTo(imageHumidity).inset(35)
+                maker.top.equalTo(himidityImage).inset(35)
                 maker.height.equalTo(25)
                 maker.width.equalTo(25)
         }
         
-        let windLabel = UILabel()
         if let wind =  viewModel.current?.windSpeed, let windDeg = Compass.direction(for: Double(viewModel.current!.windDeg!)) {
-            windLabel.text = "\(String(describing:Int(wind)))" + "м/сек" + " " + "\(String(describing: windDeg))"
+            self.windLabel.text = "\(String(describing:Int(wind)))" + "м/сек" + " " + "\(String(describing: windDeg))"
         }
-            windLabel.textColor = .white
-            windLabel.font = UIFont.systemFont(ofSize: 20)
+            self.windLabel.textColor = .white
+            self.windLabel.font = UIFont.systemFont(ofSize: 20)
         
             headerView.addSubview(windLabel)
             
-            windLabel.snp.makeConstraints { maker in
-                maker.left.equalTo(imageWind).inset(40)
+            self.windLabel.snp.makeConstraints { maker in
+                maker.left.equalTo(windImage).inset(40)
                 maker.top.equalTo(humidityLabel).inset(35)
         }
         
@@ -271,14 +275,25 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     @objc func presentSearch() {
         
         let searchViewController = SearchViewController()
-        
         self.navigationController?.pushViewController(searchViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        let daily = viewModel.dailyWeatherModel[indexPath.row]
+        let hourly = viewModel.hourly[indexPath.row]
+        
+        dayLabel.text = DateFormatting.getMonthForDates(Date(timeIntervalSince1970: Double(daily.dt!)))
+        tempLabel.text = Converter.fahrenheitToCelsius(with: (daily.temp?.min!)!, with: (daily.temp?.max!)!)
+        humidityLabel.text = "\(String(describing: hourly.humidity!))%"
+        
+        if let wind =  hourly.windSpeed, let windDeg = Compass.direction(for: Double(hourly.windDeg!)) {
+            self.windLabel.text = "\(String(describing:Int(wind)))" + "м/сек" + " " + "\(String(describing: windDeg))"
+        Icons.configureIconsDailyWeather(with: daily, iconImageView: weatherImage)
+        }
     }
 }
+
+
 
 extension MainViewController: CLLocationManagerDelegate {
     
@@ -295,7 +310,6 @@ extension MainViewController: CLLocationManagerDelegate {
     }
     
     func requestWeatherForLocation() {
-        
         guard let coordinate = locationManager.location?.coordinate else {return}
         viewModel.loadDataWeather(lat:coordinate.latitude , lon: coordinate.longitude) { [weak self]  in
             self?.reloadTable()

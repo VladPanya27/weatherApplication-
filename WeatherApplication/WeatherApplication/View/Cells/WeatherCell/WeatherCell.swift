@@ -33,7 +33,7 @@ class WeatherCell: UITableViewCell {
         self.dayLabel.text = DateFormatting.getDayForDate(Date(timeIntervalSince1970: Double(dt)))
         self.tempLabel.text = "\(Int(min - 273.15))°/ \(Int(max - 273.15))°"
         iconImageView.tintColor = .black
-        Icons.configureIconsDaily(with: model, iconImageView: iconImageView)
-
+        
+        Icons.configureIconsDailyWeather(with: model, iconImageView: iconImageView)
  }
 }

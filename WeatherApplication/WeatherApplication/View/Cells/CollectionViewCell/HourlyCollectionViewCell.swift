@@ -10,7 +10,8 @@ import UIKit
 class HourlyCollectionViewCell: UICollectionViewCell {
 
     static let identifire = "HourlyCollectionViewCell"
-
+    
+    
     static func nib() -> UINib {
         return UINib(nibName: "HourlyCollectionViewCell", bundle: nil)
     }
@@ -33,6 +34,7 @@ class HourlyCollectionViewCell: UICollectionViewCell {
         self.iconImageView.contentMode = .scaleAspectFit
         self.iconImageView.tintColor = .white
 
-        Icons.configureIconsCurrent(with: model, iconImageView: iconImageView)
+        Icons.configureIconsCurrentWeather(with: model, iconImageView: iconImageView)
     }
+    
 }

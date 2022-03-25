@@ -29,14 +29,15 @@ class ViewModelMainController: UIViewController {
     func loadDataWeather (lat: CLLocationDegrees, lon:CLLocationDegrees, completion: @escaping () -> Void?) {
         network.loadWeatherWithLatAndLon(lat: lat, lon: lon) { [weak self] weatherData  in
             if let completData = weatherData?.daily {
-                self?.dailyWeatherModel.removeAll()
-                self?.dailyWeatherModel.append(contentsOf: completData)
+                self?.dailyWeatherModel = completData
+                self?.dailyWeatherModel.removeLast(4)
                 guard let weather = weatherData else {return}
                 guard let currentWeather = weather.current else {return}
                 self?.weatherModel = weather
                 self?.current = currentWeather
                 guard let weatherHoutly = weatherData?.hourly else {return}
-                self?.hourly = weatherHoutly 
+                self?.hourly = weatherHoutly
+                self?.hourly.removeLast(24)
             }
             completion()
         }
