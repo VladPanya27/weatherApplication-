@@ -29,10 +29,10 @@
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <constraints>
-                <constraint firstItem="T53-Wr-cZ7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="FfQ-PD-niy"/>
+                <constraint firstItem="T53-Wr-cZ7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="FfQ-PD-niy"/>
                 <constraint firstAttribute="bottom" secondItem="T53-Wr-cZ7" secondAttribute="bottom" id="UJZ-CE-7qh"/>
                 <constraint firstItem="T53-Wr-cZ7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gKx-d7-2h1"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="T53-Wr-cZ7" secondAttribute="trailing" id="gdj-Qt-Rwe"/>
+                <constraint firstAttribute="trailing" secondItem="T53-Wr-cZ7" secondAttribute="trailing" id="gdj-Qt-Rwe"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

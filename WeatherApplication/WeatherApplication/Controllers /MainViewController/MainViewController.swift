@@ -51,9 +51,22 @@ class MainViewController: UIViewController  {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+    
+    func loadData(model:CLLocationCoordinate2D) {
+        viewModel.loadDataWeather(lat: model.latitude, lon: model.longitude) { [weak self] in
+            self?.reloadTable()
+        }
+    }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func reloadTable() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.tableView.tableHeaderView = self.createTableHeader()
+        }
+    }
     
     func prepareTableView() {
         tableView.delegate = self
@@ -94,6 +107,34 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? WeatherCell {
+            cell.dayLabel.textColor = UIColor.weatherLightBlue
+            cell.tempLabel.textColor = UIColor.weatherLightBlue
+            cell.iconImageView.tintColor = UIColor.weatherLightBlue
+            cell.contentView.tintColor = UIColor.weatherLightBlue
+        }
+        
+        let daily = viewModel.dailyWeatherModel[indexPath.row]
+        let hourly = viewModel.hourlyWeatherModel[indexPath.row]
+        dayLabel.text = DateFormatting.getMonth(Date(timeIntervalSince1970: Double(daily.dt!)))
+        tempLabel.text = Converter.fahrenheitToCelsius(with: daily)
+        humidityLabel.text = "\(String(describing: hourly.humidity!))%"
+        
+        if let wind =  hourly.windSpeed, let windDeg = Compass.direction(for: Double(hourly.windDeg!)) {
+            self.windLabel.text = "\(String(describing:Int(wind)))" + "м/сек" + " " + "\(String(describing: windDeg))"
+            Icons.configureDailyWeather(with: daily, iconImageView: weatherImage)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? WeatherCell {
+            cell.dayLabel.textColor = UIColor.black
+            cell.tempLabel.textColor = UIColor.black
+            cell.iconImageView.tintColor = UIColor.black
+        }
+    }
+    
     func createTableHeader() -> UIView {
         
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width/1.4))
@@ -118,9 +159,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         timezoneLabel.snp.makeConstraints { maker in
             maker.left.equalTo(imageLocation).inset(30)
+            maker.right.equalTo(headerView).inset(30)
             maker.top.equalTo(imageLocation).inset(0)
         }
-        
         
         let locationButton = UIButton()
         locationButton.setImage(UIImage(named: "-gps"), for: UIControl.State.normal)
@@ -244,21 +285,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return headerView
     }
     
-    func reloadTable() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-            self.tableView.tableHeaderView = self.createTableHeader()
-        }
-    }
-    
     @objc func presentMap() {
         let mapViewController = MapViewController()
         mapViewController.modalPresentationStyle = .fullScreen
         
         mapViewController.completion = { [weak self] model in
-            self?.viewModel.loadDataWeather(lat: model.latitude, lon: model.longitude) {
-                self?.reloadTable()
-            }
+            self?.loadData(model: model)
         }
         self.present(mapViewController, animated: true, completion: nil)
     }
@@ -267,46 +299,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let searchViewController = SearchViewController()
         
         searchViewController.completion = { [weak self] model in
-            self?.viewModel.loadDataWeather(lat: model.latitude, lon: model.longitude) {
-                self?.reloadTable()
-            }
+            self?.loadData(model: model)
         }
         self.navigationController?.pushViewController(searchViewController, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? WeatherCell {
-            cell.dayLabel.textColor = UIColor.weatherLightBlue
-            cell.tempLabel.textColor = UIColor.weatherLightBlue
-            cell.iconImageView.tintColor = UIColor.weatherLightBlue
-            cell.contentView.tintColor = UIColor.weatherLightBlue
-        }
-        
-        let daily = viewModel.dailyWeatherModel[indexPath.row]
-        let hourly = viewModel.hourlyWeatherModel[indexPath.row]
-        dayLabel.text = DateFormatting.getMonth(Date(timeIntervalSince1970: Double(daily.dt!)))
-        tempLabel.text = Converter.fahrenheitToCelsius(with: daily)
-        humidityLabel.text = "\(String(describing: hourly.humidity!))%"
-        
-        if let wind =  hourly.windSpeed, let windDeg = Compass.direction(for: Double(hourly.windDeg!)) {
-            self.windLabel.text = "\(String(describing:Int(wind)))" + "м/сек" + " " + "\(String(describing: windDeg))"
-            Icons.configureDailyWeather(with: daily, iconImageView: weatherImage)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? WeatherCell {
-            cell.dayLabel.textColor = UIColor.black
-            cell.tempLabel.textColor = UIColor.black
-            cell.iconImageView.tintColor = UIColor.black
-        }
     }
 }
 
 extension MainViewController: CLLocationManagerDelegate {
     
     func requestLocation() {
-   
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
@@ -322,8 +323,6 @@ extension MainViewController: CLLocationManagerDelegate {
     
     func requestWeatherForLocation() {
         guard let coordinate = locationManager.location?.coordinate else {return}
-        viewModel.loadDataWeather(lat:coordinate.latitude , lon: coordinate.longitude) { [weak self]  in
-            self?.reloadTable()
-        }
+        self.loadData(model: coordinate)
     }
 }

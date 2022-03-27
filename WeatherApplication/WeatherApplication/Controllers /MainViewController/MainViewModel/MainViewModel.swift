@@ -23,8 +23,8 @@ class MainViewModel {
     
     func loadDataWeather (lat: CLLocationDegrees, lon:CLLocationDegrees, completion: @escaping () -> Void?) {
         network.loadWeatherWithLatAndLon(lat: lat, lon: lon) { [weak self] weatherData  in
-            if let completData = weatherData?.daily {
-                self?.dailyWeatherModel = completData
+            if let weatherDailyData = weatherData?.daily {
+                self?.dailyWeatherModel = weatherDailyData
                 self?.dailyWeatherModel.removeLast(4)
                 guard let weather = weatherData else {return}
                 guard let currentWeather = weather.current else {return}

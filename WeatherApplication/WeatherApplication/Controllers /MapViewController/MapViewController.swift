@@ -77,8 +77,6 @@ class MapViewController: UIViewController {
 extension MapViewController: CLLocationManagerDelegate {
     
     func requestLocation() {
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self

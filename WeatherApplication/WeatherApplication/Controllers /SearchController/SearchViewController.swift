@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 
-class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating {
+class SearchViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -16,7 +16,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var completion:((CLLocationCoordinate2D) -> Void)?
     
-    var plasec:[PlaceModel] = []
+    var places:[PlaceModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,56 +25,62 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         view.backgroundColor = UIColor.weatherBlue
     }
     
+    deinit {
+        print("deinit called")
+    }
+    
     func prepareTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(PlacesCell.nib(), forCellReuseIdentifier: PlacesCell.identifire)
     }
     
     func settingSearchBar() {
         searchVC.searchResultsUpdater = self
-        searchVC.obscuresBackgroundDuringPresentation = false
-        navigationItem.titleView = searchVC.searchBar
-        definesPresentationContext = true
-        navigationController?.navigationBar.isTranslucent = false
+        self.definesPresentationContext = true
+        self.navigationItem.titleView = searchVC.searchBar
         searchVC.hidesNavigationBarDuringPresentation = false
+        self.navigationController?.navigationBar.topItem?.title = ""
         searchVC.searchBar.backgroundColor = UIColor.weatherBlue
         searchVC.searchBar.searchTextField.backgroundColor = .white
-        self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.navigationBar.tintColor = .white
     }
     
     func update(with places: [PlaceModel]) {
-        self.plasec = places
+        self.places = places
         tableView.reloadData()
     }
+}
+
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return plasec.count
+        return places.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = plasec[indexPath.row].name
+        let cell = tableView.dequeueReusableCell(withIdentifier: PlacesCell.identifire, for: indexPath)
+        cell.textLabel?.text = places[indexPath.row].name
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let place = plasec[indexPath.row]
+        let place = places[indexPath.row]
         
         GooglePlacesManager.shared.resolveLocation(for: place) { [weak self] result in
             switch result {
             case .success(let coordinate):
-                DispatchQueue.main.async {
-                    self?.completion?(coordinate)
-                    self?.navigationController?.popToRootViewController(animated: true)
-                }
+                self?.completion?(coordinate)
+                self?.navigationController?.popViewController(animated: false)
+                self?.searchVC.isActive = false
             case .failure(let error):
                 print(error)
             }
         }
     }
+}
+
+extension SearchViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let query = searchController.searchBar.text,
@@ -92,5 +98,3 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
 }
-
-

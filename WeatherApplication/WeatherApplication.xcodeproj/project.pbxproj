@@ -12,6 +12,8 @@
 		000C55C727EBAF7000382081 /* GooglePlacesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C55C627EBAF7000382081 /* GooglePlacesManager.swift */; };
 		000C55C927EBB26E00382081 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C55C827EBB26E00382081 /* PlaceModel.swift */; };
 		0041545C27EFDDC600B3BEC0 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0041545B27EFDDC600B3BEC0 /* Theme.swift */; };
+		0041546027F0BA8500B3BEC0 /* PlacesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0041545E27F0BA8500B3BEC0 /* PlacesCell.swift */; };
+		0041546127F0BA8500B3BEC0 /* PlacesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0041545F27F0BA8500B3BEC0 /* PlacesCell.xib */; };
 		0071540427E506C7000610D0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071540327E506C7000610D0 /* NetworkManager.swift */; };
 		0071540A27E793F5000610D0 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071540927E793F5000610D0 /* DateFormatter.swift */; };
 		0071540C27E79F34000610D0 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071540B27E79F34000610D0 /* Icons.swift */; };
@@ -43,6 +45,8 @@
 		000C55C627EBAF7000382081 /* GooglePlacesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesManager.swift; sourceTree = "<group>"; };
 		000C55C827EBB26E00382081 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		0041545B27EFDDC600B3BEC0 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		0041545E27F0BA8500B3BEC0 /* PlacesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesCell.swift; sourceTree = "<group>"; };
+		0041545F27F0BA8500B3BEC0 /* PlacesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlacesCell.xib; sourceTree = "<group>"; };
 		0071540327E506C7000610D0 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0071540927E793F5000610D0 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		0071540B27E79F34000610D0 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
@@ -91,6 +95,15 @@
 				000C55BD27EB913B00382081 /* SearchViewController.xib */,
 			);
 			path = SearchController;
+			sourceTree = "<group>";
+		};
+		0041545D27F0BA6000B3BEC0 /* PlacesCell */ = {
+			isa = PBXGroup;
+			children = (
+				0041545E27F0BA8500B3BEC0 /* PlacesCell.swift */,
+				0041545F27F0BA8500B3BEC0 /* PlacesCell.xib */,
+			);
+			path = PlacesCell;
 			sourceTree = "<group>";
 		};
 		0071540227E506A0000610D0 /* Managers */ = {
@@ -197,6 +210,7 @@
 		0072F2E127E4AAEC00DDB6BB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				0041545D27F0BA6000B3BEC0 /* PlacesCell */,
 				0071540D27E7A8FE000610D0 /* CollectionViewCell */,
 				0072F2E727E4AB8200DDB6BB /* HourlyCell */,
 				0072F2E227E4AB0400DDB6BB /* WeatherCell */,
@@ -332,6 +346,7 @@
 				0072F2CA27E4864400DDB6BB /* Assets.xcassets in Resources */,
 				0074049C27E9CAB7000DA155 /* MapViewController.xib in Resources */,
 				0072F2EB27E4ABF300DDB6BB /* HourlyCell.xib in Resources */,
+				0041546127F0BA8500B3BEC0 /* PlacesCell.xib in Resources */,
 				000C55BF27EB913B00382081 /* SearchViewController.xib in Resources */,
 				0071541127E7A94F000610D0 /* HourlyCollectionViewCell.xib in Resources */,
 			);
@@ -410,6 +425,7 @@
 				0072F2DC27E4A17300DDB6BB /* MainViewModel.swift in Sources */,
 				0074049327E86885000DA155 /* Compass.swift in Sources */,
 				0072F2E527E4AB4D00DDB6BB /* WeatherCell.swift in Sources */,
+				0041546027F0BA8500B3BEC0 /* PlacesCell.swift in Sources */,
 				0072F2C127E4864400DDB6BB /* AppDelegate.swift in Sources */,
 				0071540427E506C7000610D0 /* NetworkManager.swift in Sources */,
 				000C55BE27EB913B00382081 /* SearchViewController.swift in Sources */,
