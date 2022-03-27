@@ -9,9 +9,9 @@ import Foundation
 
 class ReplacingString {
     
-    static func replacing(with city: String) -> String? {
-        let city = city.replacingOccurrences(of: "/", with: ", ").replacingOccurrences(of: "_", with: " ")
+    static func replacing(with timezone: String) -> String? {
+        let timezone = timezone.replacingOccurrences(of: "/", with: ", ").replacingOccurrences(of: "_", with: " ")
     
-        return city
+        return timezone
     }
 }

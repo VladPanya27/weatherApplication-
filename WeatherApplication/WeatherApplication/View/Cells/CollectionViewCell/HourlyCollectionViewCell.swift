@@ -8,9 +8,8 @@
 import UIKit
 
 class HourlyCollectionViewCell: UICollectionViewCell {
-
-    static let identifire = "HourlyCollectionViewCell"
     
+    static let identifire = "HourlyCollectionViewCell"
     
     static func nib() -> UINib {
         return UINib(nibName: "HourlyCollectionViewCell", bundle: nil)
@@ -19,21 +18,21 @@ class HourlyCollectionViewCell: UICollectionViewCell {
     @IBOutlet var iconImageView:UIImageView!
     @IBOutlet var tempLabel:UILabel!
     @IBOutlet var hourlyLabel:UILabel!
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     func configure(with model: Current) {
         guard let dt = model.dt else {return}
         guard let temp = model.temp else {return}
-        self.hourlyLabel.text = DateFormatting.getHourlyForDates(Date(timeIntervalSince1970: Double(dt)))
+        self.hourlyLabel.text = DateFormatting.getHourly(Date(timeIntervalSince1970: Double(dt)))
         self.hourlyLabel.textColor = .white
         self.tempLabel.text = "\(Int(temp - 273.15))°"
         self.tempLabel.textColor = .white
         self.iconImageView.contentMode = .scaleAspectFit
         self.iconImageView.tintColor = .white
-
-        Icons.configureIconsCurrentWeather(with: model, iconImageView: iconImageView)
+        
+        Icons.configureCurrentWeather(with: model, iconImageView: iconImageView)
     }
 }

@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - WeatherModel
 class WeatherModel: Codable {
     let lat, lon: Double?
     let timezone: String?
@@ -16,7 +15,7 @@ class WeatherModel: Codable {
     let minutely: [Minutely]?
     let hourly: [Current]?
     let daily: [Daily]?
-
+    
     enum CodingKeys: String, CodingKey {
         case lat, lon, timezone
         case timezoneOffset = "timezone_offset"
@@ -24,7 +23,6 @@ class WeatherModel: Codable {
     }
 }
 
-// MARK: - Current
 class Current: Codable {
     let dt: Int?
     let sunrise, sunset: Int?
@@ -37,7 +35,7 @@ class Current: Codable {
     let weather: [Weather]?
     let windGust: Double?
     let pop: Double?
-
+    
     enum CodingKeys: String, CodingKey {
         case dt, sunrise, sunset, temp
         case feelsLike = "feels_like"
@@ -52,12 +50,11 @@ class Current: Codable {
     }
 }
 
-// MARK: - Weather
 class Weather: Codable {
     let id: Int?
     let main: Main?
     let weatherDescription, icon: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case id, main
         case weatherDescription = "description"
@@ -73,7 +70,6 @@ enum Main: String, Codable {
     case snow = "Snow"
 }
 
-// MARK: - Daily
 class Daily: Codable {
     let dt, sunrise, sunset, moonrise: Int?
     let moonset: Int?
@@ -88,7 +84,7 @@ class Daily: Codable {
     let clouds: Int?
     let pop, uvi: Double?
     let rain: Double?
-
+    
     enum CodingKeys: String, CodingKey {
         case dt, sunrise, sunset, moonrise, moonset
         case moonPhase = "moon_phase"
@@ -103,18 +99,15 @@ class Daily: Codable {
     }
 }
 
-// MARK: - FeelsLike
 class FeelsLike: Codable {
     let day, night, eve, morn: Double?
 }
 
-// MARK: - Temp
 class Temp: Codable {
     let day, min, max, night: Double?
     let eve, morn: Double?
 }
 
-// MARK: - Minutely
 class Minutely: Codable {
     let dt, precipitation: Int?
 }

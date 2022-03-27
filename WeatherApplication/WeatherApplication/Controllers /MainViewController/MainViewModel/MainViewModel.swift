@@ -8,20 +8,18 @@
 import Foundation
 import UIKit
 import CoreLocation
-// переназвать 
-class ViewModelMainController {
 
+class MainViewModel {
+    
     let network = NetworkManager()
     
     var dailyWeatherModel:[Daily] = []
-        
-    var hourly:[Current] = []
     
-    var current: Current?
+    var hourlyWeatherModel:[Current] = []
+    
+    var currentWeatherModel: Current?
     
     var weatherModel:WeatherModel?
-    
-    
     
     func loadDataWeather (lat: CLLocationDegrees, lon:CLLocationDegrees, completion: @escaping () -> Void?) {
         network.loadWeatherWithLatAndLon(lat: lat, lon: lon) { [weak self] weatherData  in
@@ -31,10 +29,10 @@ class ViewModelMainController {
                 guard let weather = weatherData else {return}
                 guard let currentWeather = weather.current else {return}
                 self?.weatherModel = weather
-                self?.current = currentWeather
+                self?.currentWeatherModel = currentWeather
                 guard let weatherHoutly = weatherData?.hourly else {return}
-                self?.hourly = weatherHoutly
-                self?.hourly.removeLast(24)
+                self?.hourlyWeatherModel = weatherHoutly
+                self?.hourlyWeatherModel.removeLast(24)
             }
             completion()
         }

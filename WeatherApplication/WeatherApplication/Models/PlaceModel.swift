@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Place {
+struct PlaceModel {
     let name: String
     let identifire: String
 }

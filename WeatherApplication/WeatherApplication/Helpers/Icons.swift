@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class Icons {
-    static func configureIconsDailyWeather(with model: Daily?, iconImageView: UIImageView ) {
+    static func configureDailyWeather(with model: Daily?, iconImageView: UIImageView ) {
         guard let model = model else {return}
 
         model.weather!.forEach { if $0.icon!.contains("10d") {
@@ -22,7 +22,7 @@ class Icons {
     }
  }
 
-    static func configureIconsCurrentWeather(with model: Current?, iconImageView: UIImageView ) {
+    static func configureCurrentWeather(with model: Current?, iconImageView: UIImageView ) {
         guard let model = model else {return}
         
         model.weather!.forEach { if $0.icon!.contains("10d") {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewModelMapViewController {
+class MapViewModel {
 
 
 }

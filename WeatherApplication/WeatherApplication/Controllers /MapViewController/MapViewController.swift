@@ -12,6 +12,7 @@ import CoreLocation
 class MapViewController: UIViewController {
     
     @IBOutlet weak var mapView: UIView!
+    
     @IBOutlet weak var label: UILabel!
     
     var completion:((CLLocationCoordinate2D) -> Void)?
@@ -88,7 +89,6 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 extension MapViewController: GMSMapViewDelegate {
-    
     
     func addMarker(coordinate: CLLocationCoordinate2D) {
         let marker = GMSMarker()

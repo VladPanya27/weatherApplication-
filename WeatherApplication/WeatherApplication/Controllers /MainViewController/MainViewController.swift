@@ -25,7 +25,7 @@ class MainViewController: UIViewController  {
     
     let weatherImage = UIImageView()
     
-    let viewModel = ViewModelMainController()
+    let viewModel = MainViewModel()
     
     let locationManager = CLLocationManager()
     
@@ -33,8 +33,8 @@ class MainViewController: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepareTableView()
         requestLocation()
+        prepareTableView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,8 +78,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: HourlyCell.identifire, for: indexPath) as! HourlyCell
-            
-            cell.configure(with: viewModel.hourly)
+            cell.configure(with: viewModel.hourlyWeatherModel)
             return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: WeatherCell.identifire, for: indexPath) as! WeatherCell
@@ -111,17 +110,17 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             maker.width.equalTo(20)
         }
         
-        if let timezone = ReplacingString.replacing(with: (viewModel.weatherModel?.timezone)!) {
-            timezoneLabel.text = timezone
-            timezoneLabel.textColor = .white
-            timezoneLabel.font = UIFont.systemFont(ofSize: 20)
-            headerView.addSubview(timezoneLabel)
-            
-            timezoneLabel.snp.makeConstraints { maker in
-                maker.left.equalTo(imageLocation).inset(30)
-                maker.top.equalTo(imageLocation).inset(0)
-            }
+        let timezone = ReplacingString.replacing(with: viewModel.weatherModel?.timezone ?? "")
+        timezoneLabel.text = timezone
+        timezoneLabel.textColor = .white
+        timezoneLabel.font = UIFont.systemFont(ofSize: 20)
+        headerView.addSubview(timezoneLabel)
+        
+        timezoneLabel.snp.makeConstraints { maker in
+            maker.left.equalTo(imageLocation).inset(30)
+            maker.top.equalTo(imageLocation).inset(0)
         }
+        
         
         let locationButton = UIButton()
         locationButton.setImage(UIImage(named: "-gps"), for: UIControl.State.normal)
@@ -146,16 +145,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             maker.height.equalTo(20)
             maker.width.equalTo(20)
             
-        searchButton.addTarget(self, action: #selector(presentSearch), for: .touchUpInside)
-            
+            searchButton.addTarget(self, action: #selector(presentSearch), for: .touchUpInside)
         }
         
-        if let data = viewModel.current?.dt {
-            self.dayLabel.text = DateFormatting.getMonthForDates(Date(timeIntervalSince1970: Double(data)))
+        if let data = viewModel.currentWeatherModel?.dt {
+            self.dayLabel.text = DateFormatting.getMonth(Date(timeIntervalSince1970: Double(data)))
         }
         self.dayLabel.textColor = .white
         self.dayLabel.font = UIFont.systemFont(ofSize: 15)
-        
         headerView.addSubview(dayLabel)
         
         self.dayLabel.snp.makeConstraints { maker in
@@ -164,7 +161,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         self.weatherImage.tintColor = .white
-        Icons.configureIconsCurrentWeather(with: viewModel.current!, iconImageView: self.weatherImage)
+        Icons.configureCurrentWeather(with: viewModel.currentWeatherModel!, iconImageView: self.weatherImage)
         headerView.addSubview(self.weatherImage)
         
         self.weatherImage.snp.makeConstraints { maker in
@@ -190,10 +187,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             
             self.tempLabel.textColor = .white
             self.tempLabel.font = UIFont.systemFont(ofSize: 20)
+            headerView.addSubview(self.tempLabel)
             
-            headerView.addSubview(tempLabel)
-            
-            tempLabel.snp.makeConstraints { maker in
+            self.tempLabel.snp.makeConstraints { maker in
                 maker.left.equalTo(imageTemp).inset(40)
                 maker.top.equalTo(headerView).inset(120)
             }
@@ -211,13 +207,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
         
-        if let humidity = viewModel.current?.humidity {
+        if let humidity = viewModel.currentWeatherModel?.humidity {
             self.humidityLabel.text = "\(String(describing: humidity))%"
         }
         self.humidityLabel.textColor = .white
         self.humidityLabel.font = UIFont.systemFont(ofSize: 20)
-        
-        headerView.addSubview(humidityLabel)
+        headerView.addSubview(self.humidityLabel)
         
         self.humidityLabel.snp.makeConstraints { maker in
             maker.left.equalTo(himidityImage).inset(40)
@@ -235,13 +230,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             maker.width.equalTo(25)
         }
         
-        if let wind =  viewModel.current?.windSpeed, let windDeg = Compass.direction(for: Double(viewModel.current!.windDeg!)) {
+        if let wind =  viewModel.currentWeatherModel?.windSpeed, let windDeg = Compass.direction(for: Double(viewModel.currentWeatherModel!.windDeg!)) {
             self.windLabel.text = "\(String(describing:Int(wind)))" + "м/сек" + " " + "\(String(describing: windDeg))"
         }
         self.windLabel.textColor = .white
         self.windLabel.font = UIFont.systemFont(ofSize: 20)
-        
-        headerView.addSubview(windLabel)
+        headerView.addSubview(self.windLabel)
         
         self.windLabel.snp.makeConstraints { maker in
             maker.left.equalTo(windImage).inset(40)
@@ -258,7 +252,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func presentMap() {
-        
         let mapViewController = MapViewController()
         mapViewController.modalPresentationStyle = .fullScreen
         
@@ -271,7 +264,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func presentSearch() {
-        
         let searchViewController = SearchViewController()
         
         searchViewController.completion = { [weak self] model in
@@ -291,14 +283,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let daily = viewModel.dailyWeatherModel[indexPath.row]
-        let hourly = viewModel.hourly[indexPath.row]
-        dayLabel.text = DateFormatting.getMonthForDates(Date(timeIntervalSince1970: Double(daily.dt!)))
+        let hourly = viewModel.hourlyWeatherModel[indexPath.row]
+        dayLabel.text = DateFormatting.getMonth(Date(timeIntervalSince1970: Double(daily.dt!)))
         tempLabel.text = Converter.fahrenheitToCelsius(with: daily)
         humidityLabel.text = "\(String(describing: hourly.humidity!))%"
         
         if let wind =  hourly.windSpeed, let windDeg = Compass.direction(for: Double(hourly.windDeg!)) {
             self.windLabel.text = "\(String(describing:Int(wind)))" + "м/сек" + " " + "\(String(describing: windDeg))"
-        Icons.configureIconsDailyWeather(with: daily, iconImageView: weatherImage)
+            Icons.configureDailyWeather(with: daily, iconImageView: weatherImage)
         }
     }
     
@@ -314,13 +306,16 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 extension MainViewController: CLLocationManagerDelegate {
     
     func requestLocation() {
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.requestWhenInUseAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
+   
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if !locations.isEmpty, currentLocation == nil {
+            currentLocation = locations.first
+            locationManager.stopUpdatingLocation()
             requestWeatherForLocation()
         }
     }

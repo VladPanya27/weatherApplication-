@@ -8,7 +8,7 @@
 import UIKit
 
 class HourlyCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
+    
     @IBOutlet var collectionView:UICollectionView!
     
     static let identifire = "HourlyCell"
@@ -18,7 +18,7 @@ class HourlyCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDat
     static func nib() -> UINib {
         return UINib(nibName: "HourlyCell", bundle: nil)
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.register(HourlyCollectionViewCell.nib(), forCellWithReuseIdentifier: HourlyCollectionViewCell.identifire)
@@ -26,7 +26,7 @@ class HourlyCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDat
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.weatherLightBlue
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -46,9 +46,8 @@ class HourlyCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyCollectionViewCell.identifire, for: indexPath) as! HourlyCollectionViewCell
-            cell.configure(with: models[indexPath.row])
+        cell.configure(with: models[indexPath.row])
         
         return cell
     }
-    
 }

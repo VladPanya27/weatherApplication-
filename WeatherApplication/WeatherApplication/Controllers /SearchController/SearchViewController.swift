@@ -12,17 +12,16 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var tableView: UITableView!
     
-    
     let searchVC = UISearchController(searchResultsController: nil)
     
     var completion:((CLLocationCoordinate2D) -> Void)?
     
-    var plasec:[Place] = []
+    var plasec:[PlaceModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        settingSearchBar()
         prepareTableView()
+        settingSearchBar()
         view.backgroundColor = UIColor.weatherBlue
     }
     
@@ -45,7 +44,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.navigationController?.navigationBar.topItem?.title = ""
     }
     
-    func update(with places: [Place]) {
+    func update(with places: [PlaceModel]) {
         self.plasec = places
         tableView.reloadData()
     }
@@ -62,11 +61,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
         let place = plasec[indexPath.row]
+        
         GooglePlacesManager.shared.resolveLocation(for: place) { [weak self] result in
             switch result {
-                
             case .success(let coordinate):
                 DispatchQueue.main.async {
                     self?.completion?(coordinate)

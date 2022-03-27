@@ -8,7 +8,7 @@
 import UIKit
 
 class WeatherCell: UITableViewCell {
-
+    
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var tempLabel: UILabel!
@@ -22,17 +22,17 @@ class WeatherCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
     func configure(with model: Daily) {
         guard let dt = model.dt else {return}
-        self.dayLabel.text = DateFormatting.getDayForDate(Date(timeIntervalSince1970: Double(dt)))
+        self.dayLabel.text = DateFormatting.getDay(Date(timeIntervalSince1970: Double(dt)))
         self.tempLabel.text = Converter.fahrenheitToCelsius(with: model)
         iconImageView.tintColor = .black
         
-        Icons.configureIconsDailyWeather(with: model, iconImageView: iconImageView)
- }
+        Icons.configureDailyWeather(with: model, iconImageView: iconImageView)
+    }
 }

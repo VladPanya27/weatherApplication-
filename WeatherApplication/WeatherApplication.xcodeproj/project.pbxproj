@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		000C55BE27EB913B00382081 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C55BC27EB913B00382081 /* SearchViewController.swift */; };
 		000C55BF27EB913B00382081 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 000C55BD27EB913B00382081 /* SearchViewController.xib */; };
-		000C55C727EBAF7000382081 /* GooglePalcesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C55C627EBAF7000382081 /* GooglePalcesManager.swift */; };
-		000C55C927EBB26E00382081 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C55C827EBB26E00382081 /* Place.swift */; };
+		000C55C727EBAF7000382081 /* GooglePlacesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C55C627EBAF7000382081 /* GooglePlacesManager.swift */; };
+		000C55C927EBB26E00382081 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C55C827EBB26E00382081 /* PlaceModel.swift */; };
 		0041545C27EFDDC600B3BEC0 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0041545B27EFDDC600B3BEC0 /* Theme.swift */; };
 		0071540427E506C7000610D0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071540327E506C7000610D0 /* NetworkManager.swift */; };
 		0071540A27E793F5000610D0 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071540927E793F5000610D0 /* DateFormatter.swift */; };
@@ -23,7 +23,7 @@
 		0072F2CD27E4864400DDB6BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0072F2CB27E4864400DDB6BB /* LaunchScreen.storyboard */; };
 		0072F2D727E4A0E600DDB6BB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072F2D527E4A0E600DDB6BB /* MainViewController.swift */; };
 		0072F2D827E4A0E600DDB6BB /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0072F2D627E4A0E600DDB6BB /* MainViewController.xib */; };
-		0072F2DC27E4A17300DDB6BB /* ViewModelMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072F2DB27E4A17300DDB6BB /* ViewModelMainController.swift */; };
+		0072F2DC27E4A17300DDB6BB /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072F2DB27E4A17300DDB6BB /* MainViewModel.swift */; };
 		0072F2DF27E4A97A00DDB6BB /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072F2DE27E4A97A00DDB6BB /* WeatherModel.swift */; };
 		0072F2E527E4AB4D00DDB6BB /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0072F2E327E4AB4D00DDB6BB /* WeatherCell.swift */; };
 		0072F2E627E4AB4D00DDB6BB /* WeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0072F2E427E4AB4D00DDB6BB /* WeatherCell.xib */; };
@@ -33,7 +33,6 @@
 		0074049627E9B90F000DA155 /* ReplacingString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0074049527E9B90F000DA155 /* ReplacingString.swift */; };
 		0074049B27E9CAB7000DA155 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0074049927E9CAB7000DA155 /* MapViewController.swift */; };
 		0074049C27E9CAB7000DA155 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0074049A27E9CAB7000DA155 /* MapViewController.xib */; };
-		0074049F27E9CAF0000DA155 /* ViewModelMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0074049E27E9CAF0000DA155 /* ViewModelMapViewController.swift */; };
 		00BED7E227EDED980052B265 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BED7E127EDED970052B265 /* Converter.swift */; };
 		925268F29DEEC4ECEC654DE2 /* Pods_WeatherApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2D2D05BAC0E2A96D45B3974 /* Pods_WeatherApplication.framework */; };
 /* End PBXBuildFile section */
@@ -41,8 +40,8 @@
 /* Begin PBXFileReference section */
 		000C55BC27EB913B00382081 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		000C55BD27EB913B00382081 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
-		000C55C627EBAF7000382081 /* GooglePalcesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePalcesManager.swift; sourceTree = "<group>"; };
-		000C55C827EBB26E00382081 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		000C55C627EBAF7000382081 /* GooglePlacesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesManager.swift; sourceTree = "<group>"; };
+		000C55C827EBB26E00382081 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		0041545B27EFDDC600B3BEC0 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		0071540327E506C7000610D0 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0071540927E793F5000610D0 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
@@ -57,7 +56,7 @@
 		0072F2CE27E4864400DDB6BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0072F2D527E4A0E600DDB6BB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0072F2D627E4A0E600DDB6BB /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
-		0072F2DB27E4A17300DDB6BB /* ViewModelMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelMainController.swift; sourceTree = "<group>"; };
+		0072F2DB27E4A17300DDB6BB /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		0072F2DE27E4A97A00DDB6BB /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		0072F2E327E4AB4D00DDB6BB /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 		0072F2E427E4AB4D00DDB6BB /* WeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherCell.xib; sourceTree = "<group>"; };
@@ -67,7 +66,6 @@
 		0074049527E9B90F000DA155 /* ReplacingString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplacingString.swift; sourceTree = "<group>"; };
 		0074049927E9CAB7000DA155 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		0074049A27E9CAB7000DA155 /* MapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
-		0074049E27E9CAF0000DA155 /* ViewModelMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelMapViewController.swift; sourceTree = "<group>"; };
 		00BED7E127EDED970052B265 /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		952C490EE54D13FD12AD5209 /* Pods-WeatherApplication.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApplication.debug.xcconfig"; path = "Target Support Files/Pods-WeatherApplication/Pods-WeatherApplication.debug.xcconfig"; sourceTree = "<group>"; };
 		D05389364013DE5180AA3DA1 /* Pods-WeatherApplication.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApplication.release.xcconfig"; path = "Target Support Files/Pods-WeatherApplication/Pods-WeatherApplication.release.xcconfig"; sourceTree = "<group>"; };
@@ -99,7 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				0071540327E506C7000610D0 /* NetworkManager.swift */,
-				000C55C627EBAF7000382081 /* GooglePalcesManager.swift */,
+				000C55C627EBAF7000382081 /* GooglePlacesManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -183,7 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				0072F2DE27E4A97A00DDB6BB /* WeatherModel.swift */,
-				000C55C827EBB26E00382081 /* Place.swift */,
+				000C55C827EBB26E00382081 /* PlaceModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -200,7 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				0071540D27E7A8FE000610D0 /* CollectionViewCell */,
-				0072F2E727E4AB8200DDB6BB /* HourlyCollectionCell */,
+				0072F2E727E4AB8200DDB6BB /* HourlyCell */,
 				0072F2E227E4AB0400DDB6BB /* WeatherCell */,
 			);
 			path = Cells;
@@ -215,31 +213,22 @@
 			path = WeatherCell;
 			sourceTree = "<group>";
 		};
-		0072F2E727E4AB8200DDB6BB /* HourlyCollectionCell */ = {
+		0072F2E727E4AB8200DDB6BB /* HourlyCell */ = {
 			isa = PBXGroup;
 			children = (
 				0072F2E827E4ABF300DDB6BB /* HourlyCell.swift */,
 				0072F2E927E4ABF300DDB6BB /* HourlyCell.xib */,
 			);
-			path = HourlyCollectionCell;
+			path = HourlyCell;
 			sourceTree = "<group>";
 		};
 		0074049827E9CA85000DA155 /* MapViewController */ = {
 			isa = PBXGroup;
 			children = (
 				0074049927E9CAB7000DA155 /* MapViewController.swift */,
-				0074049D27E9CAC1000DA155 /* ViewModelMapViewController */,
 				0074049A27E9CAB7000DA155 /* MapViewController.xib */,
 			);
 			path = MapViewController;
-			sourceTree = "<group>";
-		};
-		0074049D27E9CAC1000DA155 /* ViewModelMapViewController */ = {
-			isa = PBXGroup;
-			children = (
-				0074049E27E9CAF0000DA155 /* ViewModelMapViewController.swift */,
-			);
-			path = ViewModelMapViewController;
 			sourceTree = "<group>";
 		};
 		00BED7E027EDEB780052B265 /* Resources */ = {
@@ -255,7 +244,7 @@
 		00BED7E327EF37B80052B265 /* MainViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				0072F2DB27E4A17300DDB6BB /* ViewModelMainController.swift */,
+				0072F2DB27E4A17300DDB6BB /* MainViewModel.swift */,
 			);
 			path = MainViewModel;
 			sourceTree = "<group>";
@@ -415,10 +404,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0071540A27E793F5000610D0 /* DateFormatter.swift in Sources */,
-				000C55C927EBB26E00382081 /* Place.swift in Sources */,
+				000C55C927EBB26E00382081 /* PlaceModel.swift in Sources */,
 				0072F2D727E4A0E600DDB6BB /* MainViewController.swift in Sources */,
 				0071541027E7A94F000610D0 /* HourlyCollectionViewCell.swift in Sources */,
-				0072F2DC27E4A17300DDB6BB /* ViewModelMainController.swift in Sources */,
+				0072F2DC27E4A17300DDB6BB /* MainViewModel.swift in Sources */,
 				0074049327E86885000DA155 /* Compass.swift in Sources */,
 				0072F2E527E4AB4D00DDB6BB /* WeatherCell.swift in Sources */,
 				0072F2C127E4864400DDB6BB /* AppDelegate.swift in Sources */,
@@ -430,9 +419,8 @@
 				0074049627E9B90F000DA155 /* ReplacingString.swift in Sources */,
 				00BED7E227EDED980052B265 /* Converter.swift in Sources */,
 				0072F2DF27E4A97A00DDB6BB /* WeatherModel.swift in Sources */,
-				0074049F27E9CAF0000DA155 /* ViewModelMapViewController.swift in Sources */,
 				0041545C27EFDDC600B3BEC0 /* Theme.swift in Sources */,
-				000C55C727EBAF7000382081 /* GooglePalcesManager.swift in Sources */,
+				000C55C727EBAF7000382081 /* GooglePlacesManager.swift in Sources */,
 				0074049B27E9CAB7000DA155 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
