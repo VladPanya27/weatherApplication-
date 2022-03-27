@@ -29,9 +29,8 @@ class WeatherCell: UITableViewCell {
     
     func configure(with model: Daily) {
         guard let dt = model.dt else {return}
-        guard let max = model.temp?.max, let min = model.temp?.min else {return}
         self.dayLabel.text = DateFormatting.getDayForDate(Date(timeIntervalSince1970: Double(dt)))
-        self.tempLabel.text = "\(Int(min - 273.15))°/ \(Int(max - 273.15))°"
+        self.tempLabel.text = Converter.fahrenheitToCelsius(with: model)
         iconImageView.tintColor = .black
         
         Icons.configureIconsDailyWeather(with: model, iconImageView: iconImageView)

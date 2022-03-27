@@ -23,7 +23,6 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FmM-Vt-B7W">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mmr-F8-rfh">
                     <rect key="frame" x="0.0" y="746" width="414" height="150"/>
@@ -43,7 +42,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="TFk-Zw-IQd" firstAttribute="top" secondItem="1Dw-sn-DHk" secondAttribute="bottom" constant="5" id="0x6-aU-mqu"/>
                         <constraint firstItem="1Dw-sn-DHk" firstAttribute="top" secondItem="Mmr-F8-rfh" secondAttribute="top" constant="12" id="3j1-eK-BHo"/>
@@ -71,9 +70,6 @@
         </view>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGray3Color">
             <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

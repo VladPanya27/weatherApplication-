@@ -10,7 +10,7 @@ import GoogleMaps
 import CoreLocation
 
 class MapViewController: UIViewController {
-
+    
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var label: UILabel!
     
@@ -21,14 +21,14 @@ class MapViewController: UIViewController {
     var map: GMSMapView!
     
     let locationManager = CLLocationManager()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         requestLocation()
         prepareMap()
         map.delegate = self
     }
-
+    
     func prepareMap() {
         guard let coordinate = locationManager.location?.coordinate else {return}
         currentCoordinate = coordinate
@@ -38,31 +38,31 @@ class MapViewController: UIViewController {
         reverseGeocode()
         addMarker(coordinate: currentCoordinate)
     }
-
+    
     func reverseGeocode() {
         let geocoder = GMSGeocoder.init()
         geocoder.reverseGeocodeCoordinate(currentCoordinate) { [weak self] response, error in
             if (error != nil) {
-            print("reverse geodcode fail: \(error!.localizedDescription)")
+                print("reverse geodcode fail: \(error!.localizedDescription)")
             }
             if let parsed = response?.firstResult() {
-            var addressString = ""
-            if parsed.subLocality != nil {
-            addressString = addressString + parsed.subLocality! + ", "
+                var addressString = ""
+                if parsed.subLocality != nil {
+                    addressString = addressString + parsed.subLocality! + ", "
                 }
-            if parsed.thoroughfare != nil {
-            addressString = addressString + parsed.thoroughfare! + ", "
+                if parsed.thoroughfare != nil {
+                    addressString = addressString + parsed.thoroughfare! + ", "
                 }
-            if parsed.locality != nil {
-            addressString = addressString + parsed.locality! + ", "
+                if parsed.locality != nil {
+                    addressString = addressString + parsed.locality! + ", "
                 }
-            if parsed.country != nil {
-            addressString = addressString + parsed.country! + ", "
+                if parsed.country != nil {
+                    addressString = addressString + parsed.country! + ", "
                 }
-            if parsed.postalCode != nil {
-            addressString = addressString + parsed.postalCode! + " "
-            }
-            self?.label.text = addressString
+                if parsed.postalCode != nil {
+                    addressString = addressString + parsed.postalCode! + " "
+                }
+                self?.label.text = addressString
             }
         }
     }
@@ -78,7 +78,7 @@ extension MapViewController: CLLocationManagerDelegate {
     func requestLocation() {
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
-
+        
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -91,10 +91,10 @@ extension MapViewController: GMSMapViewDelegate {
     
     
     func addMarker(coordinate: CLLocationCoordinate2D) {
-            let marker = GMSMarker()
-            marker.position = coordinate
-            marker.map = map
-        }
+        let marker = GMSMarker()
+        marker.position = coordinate
+        marker.map = map
+    }
     
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         map.clear()

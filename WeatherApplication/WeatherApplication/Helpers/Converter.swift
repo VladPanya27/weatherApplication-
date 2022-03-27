@@ -8,8 +8,8 @@
 import Foundation
 
 class Converter {
-    static func fahrenheitToCelsius(with min: Double, with max: Double) -> String {
-        let convert = "\(Int(((min)) - 273.15))°/ \(Int(((max)) - 273.15))°"
+    static func fahrenheitToCelsius(with model: Daily) -> String? {
+        let convert = "\(Int((((model.temp?.min)!)) - 273.15))°/ \(Int(((model.temp?.max)!) - 273.15))°"
         
         return convert
     }

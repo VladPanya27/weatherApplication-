@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 import CoreLocation
-
-class ViewModelMainController: UIViewController {
+// переназвать 
+class ViewModelMainController {
 
     let network = NetworkManager()
     
@@ -22,9 +22,6 @@ class ViewModelMainController: UIViewController {
     var weatherModel:WeatherModel?
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     func loadDataWeather (lat: CLLocationDegrees, lon:CLLocationDegrees, completion: @escaping () -> Void?) {
         network.loadWeatherWithLatAndLon(lat: lat, lon: lon) { [weak self] weatherData  in

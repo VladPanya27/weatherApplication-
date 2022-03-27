@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -37,18 +38,28 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ah-9c-ZoX">
+                        <rect key="frame" x="0.0" y="119" width="401" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="XQk-lJ-qEi"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="QjM-lr-pYr" firstAttribute="baseline" secondItem="HRW-Ef-5kv" secondAttribute="baseline" id="0ru-u6-LdH"/>
                     <constraint firstItem="0mx-uQ-upR" firstAttribute="centerY" secondItem="HRW-Ef-5kv" secondAttribute="centerY" id="4oY-3c-Mor"/>
                     <constraint firstItem="0mx-uQ-upR" firstAttribute="leading" secondItem="HRW-Ef-5kv" secondAttribute="trailing" constant="8" symbolic="YES" id="IXK-eu-nDQ"/>
                     <constraint firstItem="0mx-uQ-upR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-15" id="JNF-9D-SrC"/>
+                    <constraint firstAttribute="bottom" secondItem="5Ah-9c-ZoX" secondAttribute="bottom" id="RVC-3Y-VOE"/>
                     <constraint firstItem="QjM-lr-pYr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="VUX-Jk-hDa"/>
                     <constraint firstAttribute="bottom" secondItem="QjM-lr-pYr" secondAttribute="bottom" id="Whp-Au-TEJ"/>
+                    <constraint firstItem="5Ah-9c-ZoX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Yk7-EI-hmu"/>
                     <constraint firstItem="QjM-lr-pYr" firstAttribute="firstBaseline" secondItem="HRW-Ef-5kv" secondAttribute="firstBaseline" id="cAx-5n-xNc"/>
                     <constraint firstItem="HRW-Ef-5kv" firstAttribute="leading" secondItem="QjM-lr-pYr" secondAttribute="trailing" constant="8" symbolic="YES" id="klp-Ls-ITB"/>
                     <constraint firstItem="QjM-lr-pYr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="qsZ-1O-HXW"/>
                     <constraint firstAttribute="trailingMargin" secondItem="0mx-uQ-upR" secondAttribute="trailing" constant="9" id="ugF-8k-99Y"/>
+                    <constraint firstAttribute="trailing" secondItem="5Ah-9c-ZoX" secondAttribute="trailing" id="zUQ-Qu-FBW"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

@@ -24,7 +24,7 @@ class HourlyCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDat
         collectionView.register(HourlyCollectionViewCell.nib(), forCellWithReuseIdentifier: HourlyCollectionViewCell.identifire)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = UIColor(red: 90/255.0, green: 159/255.0, blue: 240/255.0, alpha: 1.0)
+        collectionView.backgroundColor = UIColor.weatherLightBlue
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

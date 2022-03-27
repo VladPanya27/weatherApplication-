@@ -27,7 +27,6 @@ class GooglePlacesManager {
         client.findAutocompletePredictions(fromQuery: query, filter: filter, sessionToken: token) { result, error in
             guard let result = result, error == nil else {
                 completion(.failure(PlaceError.failedToFind))
-                print(error?.localizedDescription)
                 return
             }
             let places:[Place] = result.compactMap { Place(name: $0.attributedFullText.string, identifire: $0.placeID)

@@ -7,9 +7,7 @@
 
 import UIKit
 
-class ViewModelMapViewController: UIViewController {
+class ViewModelMapViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+
 }

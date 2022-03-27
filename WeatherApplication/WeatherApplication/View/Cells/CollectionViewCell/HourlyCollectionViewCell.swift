@@ -36,5 +36,4 @@ class HourlyCollectionViewCell: UICollectionViewCell {
 
         Icons.configureIconsCurrentWeather(with: model, iconImageView: iconImageView)
     }
-    
 }

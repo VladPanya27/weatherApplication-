@@ -10,7 +10,7 @@ import CoreLocation
 import SnapKit
 
 class MainViewController: UIViewController  {
- 
+    
     @IBOutlet weak var tableView: UITableView!
     
     let dayLabel = UILabel()
@@ -26,9 +26,9 @@ class MainViewController: UIViewController  {
     let weatherImage = UIImageView()
     
     let viewModel = ViewModelMainController()
-        
+    
     let locationManager = CLLocationManager()
-
+    
     var currentLocation: CLLocation?
     
     override func viewDidLoad() {
@@ -39,31 +39,31 @@ class MainViewController: UIViewController  {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        view.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+        view.backgroundColor = UIColor.weatherBlue
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-
 }
-    
+
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
-        
+    
     func prepareTableView() {
-         tableView.delegate = self
-         tableView.dataSource = self
-         tableView.register(HourlyCell.nib(), forCellReuseIdentifier: HourlyCell.identifire)
-         tableView.register(WeatherCell.nib(), forCellReuseIdentifier: WeatherCell.identifire)
-         tableView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(HourlyCell.nib(), forCellReuseIdentifier: HourlyCell.identifire)
+        tableView.register(WeatherCell.nib(), forCellReuseIdentifier: WeatherCell.identifire)
+        tableView.backgroundColor = UIColor.weatherBlue
+        tableView.allowsSelection = true
     }
-        
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -72,20 +72,19 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 1
         }
-            return viewModel.dailyWeatherModel.count
-        }
-        
+        return viewModel.dailyWeatherModel.count
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HourlyCell.identifire, for: indexPath) as! HourlyCell
-            cell.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
-
+            let cell = tableView.dequeueReusableCell(withIdentifier: HourlyCell.identifire, for: indexPath) as! HourlyCell
+            
             cell.configure(with: viewModel.hourly)
             return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: WeatherCell.identifire, for: indexPath) as! WeatherCell
-            cell.configure(with: viewModel.dailyWeatherModel[indexPath.row])
-            return cell
+        cell.configure(with: viewModel.dailyWeatherModel[indexPath.row])
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -99,19 +98,19 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func createTableHeader() -> UIView {
         
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width/1.4))
-          
-            headerView.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+        
+        headerView.backgroundColor = UIColor.weatherBlue
         
         let imageLocation = UIImageView(image: UIImage(named: "icons-location"))
-            headerView.addSubview(imageLocation)
+        headerView.addSubview(imageLocation)
         
-            imageLocation.snp.makeConstraints { maker in
-                maker.left.equalTo(headerView).inset(10)
-                maker.top.equalTo(headerView).inset(10)
-                maker.height.equalTo(20)
-                maker.width.equalTo(20)
+        imageLocation.snp.makeConstraints { maker in
+            maker.left.equalTo(headerView).inset(10)
+            maker.top.equalTo(headerView).inset(10)
+            maker.height.equalTo(20)
+            maker.width.equalTo(20)
         }
-
+        
         if let timezone = ReplacingString.replacing(with: (viewModel.weatherModel?.timezone)!) {
             timezoneLabel.text = timezone
             timezoneLabel.textColor = .white
@@ -121,69 +120,69 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             timezoneLabel.snp.makeConstraints { maker in
                 maker.left.equalTo(imageLocation).inset(30)
                 maker.top.equalTo(imageLocation).inset(0)
-        }
-    }
-    
-        let locationButton = UIButton()
-            locationButton.setImage(UIImage(named: "-gps"), for: UIControl.State.normal)
-            headerView.addSubview(locationButton)
-        
-            locationButton.snp.makeConstraints { maker in
-                maker.trailing.equalTo(headerView).inset(10)
-                maker.top.equalTo(headerView).inset(10)
-                maker.height.equalTo(25)
-                maker.width.equalTo(25)
-          
-                locationButton.addTarget(self, action: #selector(presentMap), for: .touchUpInside)
             }
+        }
+        
+        let locationButton = UIButton()
+        locationButton.setImage(UIImage(named: "-gps"), for: UIControl.State.normal)
+        headerView.addSubview(locationButton)
+        
+        locationButton.snp.makeConstraints { maker in
+            maker.trailing.equalTo(headerView).inset(10)
+            maker.top.equalTo(headerView).inset(10)
+            maker.height.equalTo(25)
+            maker.width.equalTo(25)
+            
+            locationButton.addTarget(self, action: #selector(presentMap), for: .touchUpInside)
+        }
         
         let searchButton = UIButton()
-            searchButton.setImage(UIImage(named: "search"), for: UIControl.State.normal)
-            headerView.addSubview(searchButton)
+        searchButton.setImage(UIImage(named: "search"), for: UIControl.State.normal)
+        headerView.addSubview(searchButton)
         
-            searchButton.snp.makeConstraints { maker in
-                maker.trailing.equalTo(locationButton).inset(40)
-                maker.top.equalTo(headerView).inset(14)
-                maker.height.equalTo(20)
-                maker.width.equalTo(20)
+        searchButton.snp.makeConstraints { maker in
+            maker.trailing.equalTo(locationButton).inset(40)
+            maker.top.equalTo(headerView).inset(14)
+            maker.height.equalTo(20)
+            maker.width.equalTo(20)
             
-            searchButton.addTarget(self, action: #selector(presentSearch), for: .touchUpInside)
-
+        searchButton.addTarget(self, action: #selector(presentSearch), for: .touchUpInside)
+            
         }
         
         if let data = viewModel.current?.dt {
             self.dayLabel.text = DateFormatting.getMonthForDates(Date(timeIntervalSince1970: Double(data)))
         }
-            self.dayLabel.textColor = .white
-            self.dayLabel.font = UIFont.systemFont(ofSize: 15)
+        self.dayLabel.textColor = .white
+        self.dayLabel.font = UIFont.systemFont(ofSize: 15)
         
-            headerView.addSubview(dayLabel)
-            
-            self.dayLabel.snp.makeConstraints { maker in
-                maker.left.equalTo(imageLocation).inset(10)
-                maker.top.equalTo(imageLocation).inset(40)
+        headerView.addSubview(dayLabel)
+        
+        self.dayLabel.snp.makeConstraints { maker in
+            maker.left.equalTo(imageLocation).inset(10)
+            maker.top.equalTo(imageLocation).inset(40)
         }
-
-            self.weatherImage.tintColor = .white
-            Icons.configureIconsCurrentWeather(with: viewModel.current!, iconImageView: self.weatherImage)
-            headerView.addSubview(self.weatherImage)
         
-            self.weatherImage.snp.makeConstraints { maker in
-                maker.left.equalTo(headerView).inset(30)
-                maker.top.equalTo(headerView).inset(100)
-                maker.height.equalTo(120)
-                maker.width.equalTo(150)
+        self.weatherImage.tintColor = .white
+        Icons.configureIconsCurrentWeather(with: viewModel.current!, iconImageView: self.weatherImage)
+        headerView.addSubview(self.weatherImage)
+        
+        self.weatherImage.snp.makeConstraints { maker in
+            maker.left.equalTo(headerView).inset(30)
+            maker.top.equalTo(headerView).inset(100)
+            maker.height.equalTo(120)
+            maker.width.equalTo(150)
         }
         
         let imageTemp = UIImageView(image: UIImage(systemName: "thermometer"))
-            imageTemp.tintColor = .white
-            headerView.addSubview(imageTemp)
+        imageTemp.tintColor = .white
+        headerView.addSubview(imageTemp)
         
-            imageTemp.snp.makeConstraints { maker in
-                maker.trailing.equalTo(headerView).inset(120)
-                maker.top.equalTo(headerView).inset(120)
-                maker.height.equalTo(25)
-                maker.width.equalTo(25)
+        imageTemp.snp.makeConstraints { maker in
+            maker.trailing.equalTo(headerView).inset(120)
+            maker.top.equalTo(headerView).inset(120)
+            maker.height.equalTo(25)
+            maker.width.equalTo(25)
         }
         
         if let tempMin = viewModel.dailyWeatherModel[0].temp?.min, let tempMax = viewModel.dailyWeatherModel[0].temp?.max  {
@@ -191,69 +190,68 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             
             self.tempLabel.textColor = .white
             self.tempLabel.font = UIFont.systemFont(ofSize: 20)
-        
+            
             headerView.addSubview(tempLabel)
             
             tempLabel.snp.makeConstraints { maker in
                 maker.left.equalTo(imageTemp).inset(40)
                 maker.top.equalTo(headerView).inset(120)
+            }
         }
-    }
-    
-        let himidityImage = UIImageView(image: UIImage(named: "humidity"))
-            himidityImage.tintColor = .white
-            headerView.addSubview(himidityImage)
         
-            himidityImage.snp.makeConstraints { maker in
-                maker.trailing.equalTo(headerView).inset(120)
-                maker.top.equalTo(imageTemp).inset(35)
-                maker.height.equalTo(25)
-                maker.width.equalTo(25)
-          
+        let himidityImage = UIImageView(image: UIImage(named: "humidity"))
+        himidityImage.tintColor = .white
+        headerView.addSubview(himidityImage)
+        
+        himidityImage.snp.makeConstraints { maker in
+            maker.trailing.equalTo(headerView).inset(120)
+            maker.top.equalTo(imageTemp).inset(35)
+            maker.height.equalTo(25)
+            maker.width.equalTo(25)
+            
         }
         
         if let humidity = viewModel.current?.humidity {
             self.humidityLabel.text = "\(String(describing: humidity))%"
         }
-            self.humidityLabel.textColor = .white
-            self.humidityLabel.font = UIFont.systemFont(ofSize: 20)
+        self.humidityLabel.textColor = .white
+        self.humidityLabel.font = UIFont.systemFont(ofSize: 20)
         
-            headerView.addSubview(humidityLabel)
-            
-            self.humidityLabel.snp.makeConstraints { maker in
-                maker.left.equalTo(himidityImage).inset(40)
-                maker.top.equalTo(tempLabel).inset(35)
+        headerView.addSubview(humidityLabel)
+        
+        self.humidityLabel.snp.makeConstraints { maker in
+            maker.left.equalTo(himidityImage).inset(40)
+            maker.top.equalTo(tempLabel).inset(35)
         }
         
         let windImage = UIImageView(image: UIImage(named: "wind"))
-            windImage.tintColor = .white
-            headerView.addSubview(windImage)
+        windImage.tintColor = .white
+        headerView.addSubview(windImage)
         
-            windImage.snp.makeConstraints { maker in
-                maker.trailing.equalTo(headerView).inset(120)
-                maker.top.equalTo(himidityImage).inset(35)
-                maker.height.equalTo(25)
-                maker.width.equalTo(25)
+        windImage.snp.makeConstraints { maker in
+            maker.trailing.equalTo(headerView).inset(120)
+            maker.top.equalTo(himidityImage).inset(35)
+            maker.height.equalTo(25)
+            maker.width.equalTo(25)
         }
         
         if let wind =  viewModel.current?.windSpeed, let windDeg = Compass.direction(for: Double(viewModel.current!.windDeg!)) {
             self.windLabel.text = "\(String(describing:Int(wind)))" + "м/сек" + " " + "\(String(describing: windDeg))"
         }
-            self.windLabel.textColor = .white
-            self.windLabel.font = UIFont.systemFont(ofSize: 20)
+        self.windLabel.textColor = .white
+        self.windLabel.font = UIFont.systemFont(ofSize: 20)
         
-            headerView.addSubview(windLabel)
-            
-            self.windLabel.snp.makeConstraints { maker in
-                maker.left.equalTo(windImage).inset(40)
-                maker.top.equalTo(humidityLabel).inset(35)
+        headerView.addSubview(windLabel)
+        
+        self.windLabel.snp.makeConstraints { maker in
+            maker.left.equalTo(windImage).inset(40)
+            maker.top.equalTo(humidityLabel).inset(35)
         }
-        
         return headerView
     }
     
     func reloadTable() {
-         DispatchQueue.main.async {
+        DispatchQueue.main.async {
             self.tableView.reloadData()
             self.tableView.tableHeaderView = self.createTableHeader()
         }
@@ -262,28 +260,40 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     @objc func presentMap() {
         
         let mapViewController = MapViewController()
-            mapViewController.modalPresentationStyle = .fullScreen
+        mapViewController.modalPresentationStyle = .fullScreen
         
         mapViewController.completion = { [weak self] model in
             self?.viewModel.loadDataWeather(lat: model.latitude, lon: model.longitude) {
-            self?.reloadTable()
+                self?.reloadTable()
             }
         }
-            self.present(mapViewController, animated: true, completion: nil)
+        self.present(mapViewController, animated: true, completion: nil)
     }
     
     @objc func presentSearch() {
         
         let searchViewController = SearchViewController()
+        
+        searchViewController.completion = { [weak self] model in
+            self?.viewModel.loadDataWeather(lat: model.latitude, lon: model.longitude) {
+                self?.reloadTable()
+            }
+        }
         self.navigationController?.pushViewController(searchViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? WeatherCell {
+            cell.dayLabel.textColor = UIColor.weatherLightBlue
+            cell.tempLabel.textColor = UIColor.weatherLightBlue
+            cell.iconImageView.tintColor = UIColor.weatherLightBlue
+            cell.contentView.tintColor = UIColor.weatherLightBlue
+        }
+        
         let daily = viewModel.dailyWeatherModel[indexPath.row]
         let hourly = viewModel.hourly[indexPath.row]
-        
         dayLabel.text = DateFormatting.getMonthForDates(Date(timeIntervalSince1970: Double(daily.dt!)))
-        tempLabel.text = Converter.fahrenheitToCelsius(with: (daily.temp?.min!)!, with: (daily.temp?.max!)!)
+        tempLabel.text = Converter.fahrenheitToCelsius(with: daily)
         humidityLabel.text = "\(String(describing: hourly.humidity!))%"
         
         if let wind =  hourly.windSpeed, let windDeg = Compass.direction(for: Double(hourly.windDeg!)) {
@@ -291,16 +301,22 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         Icons.configureIconsDailyWeather(with: daily, iconImageView: weatherImage)
         }
     }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? WeatherCell {
+            cell.dayLabel.textColor = UIColor.black
+            cell.tempLabel.textColor = UIColor.black
+            cell.iconImageView.tintColor = UIColor.black
+        }
+    }
 }
-
-
 
 extension MainViewController: CLLocationManagerDelegate {
     
     func requestLocation() {
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
-
+        
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters

@@ -8,40 +8,33 @@
 import UIKit
 import GooglePlaces
 
-class SearchViewController: UIViewController, UISearchResultsUpdating {
+class SearchViewController: UIViewController {
 
-    let searchVC = UISearchController(searchResultsController: ResultViewController())
+   // let searchVC = UISearchController(searchResultsController: ResultViewController())
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        settingSearchBar()
+      //  settingSearchBar()
     }
+
+  //  func settingSearchBar() {
+    //       searchVC.searchBar.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+        //view.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
+         //  searchVC.searchResultsUpdater = self
+          // navigationItem.searchController = searchVC
+           //searchVC.searchBar.searchTextField.backgroundColor = .white
+           //self.navigationController?.navigationBar.tintColor = UIColor.white
+       //    self.navigationController?.navigationBar.topItem?.title = ""
+       //}
     
-    func settingSearchBar() {
-           searchVC.searchBar.backgroundColor = UIColor(red: 74/255.0, green: 144/255.0, blue: 226/255.0, alpha: 1.0)
-           searchVC.searchBar.tintColor = .white
-           searchVC.searchResultsUpdater = self
-            navigationItem.searchController = searchVC
-         //  searchVC.hidesNavigationBarDuringPresentation = false
-         //  searchVC.automaticallyShowsSearchResultsController = false
-           searchVC.searchBar.searchTextField.backgroundColor = .white
-           self.navigationController?.navigationBar.tintColor = UIColor.white
-           self.navigationController?.navigationBar.topItem?.title = ""
-       }
+   
+
+//extension SearchViewController: ResultViewControllerDelegate {
     
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let query = searchController.searchBar.text,
-              !query.trimmingCharacters(in: .whitespaces).isEmpty,
-              let resultVC = searchController.searchResultsController as? ResultViewController else {return}
-        GooglePlacesManager.shared.findPlaces(query: query) { result in
-            switch result {
-            case .success(let place):
-                DispatchQueue.main.async {
-                    resultVC.update(with: place)
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
+ //   func didTapCoordinate(with coordinate: CLLocationCoordinate2D) {
+  //      searchVC.dismiss(animated: true)
+   //     self.completion?(coordinate)
+   // }
 }
