@@ -15,11 +15,26 @@ class WeatherModel: Codable {
     let minutely: [Minutely]?
     let hourly: [Current]?
     let daily: [Daily]?
-    
+    let alerts: [Alert]?
+
     enum CodingKeys: String, CodingKey {
         case lat, lon, timezone
         case timezoneOffset = "timezone_offset"
-        case current, minutely, hourly, daily
+        case current, minutely, hourly, daily, alerts
+    }
+}
+
+class Alert: Codable {
+    let senderName, event: String?
+    let start, end: Int?
+    let alertDescription: String?
+    let tags: [String]?
+
+    enum CodingKeys: String, CodingKey {
+        case senderName = "sender_name"
+        case event, start, end
+        case alertDescription = "description"
+        case tags
     }
 }
 
@@ -32,10 +47,11 @@ class Current: Codable {
     let clouds, visibility: Int?
     let windSpeed: Double?
     let windDeg: Int?
-    let weather: [Weather]?
     let windGust: Double?
+    let weather: [Weather]?
+    let rain: Rain?
     let pop: Double?
-    
+
     enum CodingKeys: String, CodingKey {
         case dt, sunrise, sunset, temp
         case feelsLike = "feels_like"
@@ -44,30 +60,51 @@ class Current: Codable {
         case uvi, clouds, visibility
         case windSpeed = "wind_speed"
         case windDeg = "wind_deg"
-        case weather
         case windGust = "wind_gust"
-        case pop
+        case weather, rain, pop
+    }
+}
+
+class Rain: Codable {
+    let the1H: Double?
+
+    enum CodingKeys: String, CodingKey {
+        case the1H = "1h"
     }
 }
 
 class Weather: Codable {
     let id: Int?
     let main: Main?
-    let weatherDescription, icon: String?
-    
+    let icon: Icon
+
     enum CodingKeys: String, CodingKey {
         case id, main
-        case weatherDescription = "description"
         case icon
     }
+}
+
+enum Icon: String, Codable {
+    case the01D = "01d"
+    case the01N = "01n"
+    case the02N = "02n"
+    case the03N = "03n"
+    case the50D = "50d"
+    case the10N = "10n"
+    case the04N = "04n"
+    case the10D = "10d"
+    case the04D = "04d"
+    case the03D = "03d"
+    case the02D = "02d"
+    case the13D = "13d"
 }
 
 enum Main: String, Codable {
     case clear = "Clear"
     case clouds = "Clouds"
-    case mist = "Mist"
     case rain = "Rain"
     case snow = "Snow"
+    case haze = "Haze"
 }
 
 class Daily: Codable {
@@ -82,9 +119,10 @@ class Daily: Codable {
     let windGust: Double?
     let weather: [Weather]?
     let clouds: Int?
-    let pop, uvi: Double?
+    let pop: Double?
     let rain: Double?
-    
+    let uvi: Double?
+
     enum CodingKeys: String, CodingKey {
         case dt, sunrise, sunset, moonrise, moonset
         case moonPhase = "moon_phase"
@@ -95,7 +133,7 @@ class Daily: Codable {
         case windSpeed = "wind_speed"
         case windDeg = "wind_deg"
         case windGust = "wind_gust"
-        case weather, clouds, pop, uvi, rain
+        case weather, clouds, pop, rain, uvi
     }
 }
 
@@ -106,9 +144,10 @@ class FeelsLike: Codable {
 class Temp: Codable {
     let day, min, max, night: Double?
     let eve, morn: Double?
+
 }
 
 class Minutely: Codable {
-    let dt, precipitation: Int?
+    let dt: Int?
+    let precipitation: Double?
 }
-
