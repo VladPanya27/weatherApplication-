@@ -25,10 +25,6 @@ class SearchViewController: UIViewController {
         view.backgroundColor = UIColor.weatherBlue
     }
     
-    deinit {
-        print("deinit called")
-    }
-    
     func prepareTableView() {
         tableView.delegate = self
         tableView.dataSource = self

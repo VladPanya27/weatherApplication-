@@ -13,9 +13,9 @@ class Icons {
     static func configureDailyWeather(with model: Daily?, iconImageView: UIImageView ) {
         guard let model = model else {return}
         
-        model.weather!.forEach { if $0.icon.rawValue.contains("10d") {
+        model.weather!.forEach { if $0.icon!.rawValue.contains("10d") {
             iconImageView.image = UIImage(systemName:"cloud.rain")
-        } else if $0.icon.rawValue.contains("01d") {
+        } else if $0.icon!.rawValue.contains("01d") {
             iconImageView.image = UIImage(systemName:"sun.max")
         } else {
             iconImageView.image = UIImage(systemName:"cloud.sun")
@@ -26,9 +26,9 @@ class Icons {
     static func configureCurrentWeather(with model: Current?, iconImageView: UIImageView ) {
         guard let model = model else {return}
         
-        model.weather!.forEach { if $0.icon.rawValue.contains("10d") {
+        model.weather!.forEach { if $0.icon!.rawValue.contains("10d") {
             iconImageView.image = UIImage(systemName:"cloud.rain")
-        } else if $0.icon.rawValue.contains("01d") {
+        } else if $0.icon!.rawValue.contains("01d") {
             iconImageView.image = UIImage(systemName:"sun.max")
         } else {
             iconImageView.image = UIImage(systemName:"cloud.sun")
