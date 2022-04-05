@@ -17,11 +17,11 @@ class MapViewController: UIViewController {
     
     var completion:((CLLocationCoordinate2D) -> Void)?
     
-    var currentCoordinate:CLLocationCoordinate2D!
+    private var currentCoordinate:CLLocationCoordinate2D!
     
-    var map: GMSMapView!
+    private var map: GMSMapView!
     
-    let locationManager = CLLocationManager()
+    private let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class MapViewController: UIViewController {
         map.delegate = self
     }
     
-    func prepareMap() {
+    private func prepareMap() {
         guard let coordinate = locationManager.location?.coordinate else {return}
         currentCoordinate = coordinate
         let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 15.0)
@@ -40,7 +40,7 @@ class MapViewController: UIViewController {
         addMarker(coordinate: currentCoordinate)
     }
     
-    func reverseGeocode() {
+    private func reverseGeocode() {
         let geocoder = GMSGeocoder.init()
         geocoder.reverseGeocodeCoordinate(currentCoordinate) { [weak self] response, error in
             if (error != nil) {
@@ -76,7 +76,7 @@ class MapViewController: UIViewController {
 
 extension MapViewController: CLLocationManagerDelegate {
     
-    func requestLocation() {
+   private func requestLocation() {
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
@@ -88,7 +88,7 @@ extension MapViewController: CLLocationManagerDelegate {
 
 extension MapViewController: GMSMapViewDelegate {
     
-    func addMarker(coordinate: CLLocationCoordinate2D) {
+   private func addMarker(coordinate: CLLocationCoordinate2D) {
         let marker = GMSMarker()
         marker.position = coordinate
         marker.map = map

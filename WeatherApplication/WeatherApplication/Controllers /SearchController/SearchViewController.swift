@@ -12,11 +12,11 @@ class SearchViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let searchVC = UISearchController(searchResultsController: nil)
+    private let searchVC = UISearchController(searchResultsController: nil)
     
     var completion:((CLLocationCoordinate2D) -> Void)?
     
-    var places:[PlaceModel] = []
+    private var places:[PlaceModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +25,13 @@ class SearchViewController: UIViewController {
         view.backgroundColor = UIColor.weatherBlue
     }
     
-    func prepareTableView() {
+   private func prepareTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(PlacesCell.nib(), forCellReuseIdentifier: PlacesCell.identifire)
     }
     
-    func settingSearchBar() {
+   private func settingSearchBar() {
         searchVC.searchResultsUpdater = self
         self.definesPresentationContext = true
         self.navigationItem.titleView = searchVC.searchBar
@@ -42,7 +42,7 @@ class SearchViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = .white
     }
     
-    func update(with places: [PlaceModel]) {
+   private func update(with places: [PlaceModel]) {
         self.places = places
         tableView.reloadData()
     }
@@ -82,11 +82,11 @@ extension SearchViewController: UISearchResultsUpdating {
         guard let query = searchController.searchBar.text,
               !query.trimmingCharacters(in: .whitespaces).isEmpty else {return}
         
-        GooglePlacesManager.shared.findPlaces(query: query) { result in
+        GooglePlacesManager.shared.findPlaces(query: query) { [weak self] result in
             switch result {
             case .success(let place):
                 DispatchQueue.main.async {
-                    self.update(with: place)
+                    self?.update(with: place)
                 }
             case .failure(let error):
                 print(error)

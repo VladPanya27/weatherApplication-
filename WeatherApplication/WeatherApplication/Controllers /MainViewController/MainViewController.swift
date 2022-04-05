@@ -13,28 +13,28 @@ class MainViewController: UIViewController  {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let dayLabel = UILabel()
+    private let dayLabel = UILabel()
     
-    let tempLabel = UILabel()
+    private let tempLabel = UILabel()
     
-    let humidityLabel = UILabel()
+    private let humidityLabel = UILabel()
     
-    let windLabel = UILabel()
+    private let windLabel = UILabel()
     
-    let timezoneLabel = UILabel()
+    private let timezoneLabel = UILabel()
     
-    let weatherImage = UIImageView()
+    private let weatherImage = UIImageView()
     
-    let viewModel = MainViewModel()
+    private let viewModel = MainViewModel()
     
-    let locationManager = CLLocationManager()
+    private let locationManager = CLLocationManager()
     
-    var currentLocation: CLLocation?
+    private var currentLocation: CLLocation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        requestLocation()
         prepareTableView()
+        requestLocation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,7 +52,7 @@ class MainViewController: UIViewController  {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    func loadData(model:CLLocationCoordinate2D) {
+    private func loadData(model:CLLocationCoordinate2D) {
         viewModel.loadDataWeather(lat: model.latitude, lon: model.longitude) { [weak self] in
             self?.reloadTable()
         }
@@ -61,7 +61,7 @@ class MainViewController: UIViewController  {
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func reloadTable() {
+    private func reloadTable() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
             self.tableView.tableHeaderView = self.createTableHeader()
@@ -107,6 +107,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? WeatherCell {
             cell.dayLabel.textColor = UIColor.weatherLightBlue
@@ -135,7 +136,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func createTableHeader() -> UIView {
+    private func createTableHeader() -> UIView {
         
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width/1.4))
         
@@ -285,7 +286,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return headerView
     }
     
-    @objc func presentMap() {
+    @objc private func presentMap() {
         let mapViewController = MapViewController()
         mapViewController.modalPresentationStyle = .fullScreen
         
@@ -295,7 +296,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         self.present(mapViewController, animated: true, completion: nil)
     }
     
-    @objc func presentSearch() {
+    @objc private func presentSearch() {
         let searchViewController = SearchViewController()
         
         searchViewController.completion = { [weak self] model in
@@ -307,7 +308,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MainViewController: CLLocationManagerDelegate {
     
-    func requestLocation() {
+    private func requestLocation() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
@@ -321,7 +322,7 @@ extension MainViewController: CLLocationManagerDelegate {
         }
     }
     
-    func requestWeatherForLocation() {
+    private func requestWeatherForLocation() {
         guard let coordinate = locationManager.location?.coordinate else {return}
         self.loadData(model: coordinate)
     }

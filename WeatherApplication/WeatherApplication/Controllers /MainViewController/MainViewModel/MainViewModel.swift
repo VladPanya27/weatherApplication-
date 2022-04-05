@@ -11,7 +11,7 @@ import CoreLocation
 
 class MainViewModel {
     
-    let network = NetworkManager()
+    private let network = NetworkManager()
     
     var dailyWeatherModel:[Daily] = []
     
